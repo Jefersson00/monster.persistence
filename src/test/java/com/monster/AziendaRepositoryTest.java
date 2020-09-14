@@ -14,6 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.monster.persistence.entity.Azienda;
 import com.monster.repository.AziendaRepository;
 
+
+//@jefersson jeferssonserrano00@gmail.com
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class AziendaRepositoryTest extends AbstractRepositoryTest {
@@ -26,7 +28,7 @@ public class AziendaRepositoryTest extends AbstractRepositoryTest {
 	@BeforeEach
 	@AfterEach
 	public void initializeAziendaTest() {
-		logger.info("AziendaRepositoryTest.initializeAziendaTest - START");
+		logger.info("AziendaRepositoryTest.initializeAziendaTest - START");		
 		aziendaRT.deleteAll();
 		//getFakeAzienda();
 		logger.info("AziendaRepositoryTest.initializeAziendaTest - END");
@@ -44,14 +46,12 @@ public class AziendaRepositoryTest extends AbstractRepositoryTest {
 	}
 	
 	
-	
 	@Test
     public void testSelectAllFilled(){
     	logger.info("AziendaRepositoryTest.testSelectAllFilled() - START");    	
     	
     	getFakeAzienda();
-    	
-    	System.out.println(aziendaRT.count());
+//    	System.out.println(aziendaRT.count());
     	Assertions.assertTrue(aziendaRT.count() == 1);
     	logger.info("AziendaRepositoryTest.testSelectAllFilled() - END");
     }

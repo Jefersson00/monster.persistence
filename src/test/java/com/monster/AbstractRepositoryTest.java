@@ -1,5 +1,5 @@
 package com.monster;
-
+//@jefersson jeferssonserrano00@gmail.com
 
 import java.util.Date;
 
@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.monster.persistence.entity.Annuncio;
 import com.monster.persistence.entity.Azienda;
+import com.monster.persistence.entity.Sede;
 import com.monster.persistence.entity.Settore;
 import com.monster.persistence.entity.Utente;
 import com.monster.repository.AnnuncioRepository;
 import com.monster.repository.AziendaRepository;
+import com.monster.repository.SedeRepository;
 import com.monster.repository.UtenteRepository;
 
 public abstract class AbstractRepositoryTest {
@@ -24,6 +26,9 @@ public abstract class AbstractRepositoryTest {
 	
 	@Autowired
 	private AziendaRepository aziendaRepository;
+	
+	@Autowired
+	private SedeRepository sedeRepository;
 
 
 	protected Utente getFakeUtente() {
@@ -98,34 +103,25 @@ public abstract class AbstractRepositoryTest {
 		testAzienda.setAnnoFondazione(date);
 		testAzienda.setSettore("testSettoreAzienda");
 		aziendaRepository.save(testAzienda);
-		logger.error("AbstractRepositoryTest.getFakeAziendaWithNameAndEmail - Debug:"+testAzienda.getId()+"--"+testAzienda.getEmail());    	
+//		logger.error("AbstractRepositoryTest.getFakeAziendaWithNameAndEmail - Debug:"+testAzienda.getId()+"--"+testAzienda.getEmail());    	
 		
 		
 		logger.info("AbstractRepositoryTest.getFakeAziendaWithNameAndEmail - END");    	
 		return testAzienda;
 	}
 	
-	
-//	protected Azienda getFakeAzienda() {
-//		Azienda testAzienda = new Azienda();
-//		int random = (int) (Math.random() * 10000);
-//		testAzienda.setEmail(random+"email");
-//		testAzienda.setPassword("pswTest");
-//		testAzienda.setNome(random+"enail");
-//		testAzienda.setDecrizione("descrizione azienda");
-//		testAzienda.setNumeroDipendenti(random);
-//		testAzienda.setLink("testLinkAzienda");
-//		testAzienda.setLogo("testLogoAzienda");
-//		long timestamp = System.currentTimeMillis();
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//        Date date = new Date(timestamp);
-//		testAzienda.setAnnoFondazione(date);
-//		testAzienda.setSettore("testSettoreAzienda");
-//		System.out.println("arriva+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-//		aziendaRepository.save(testAzienda);
-//		System.out.println("salva+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-//		return testAzienda;
-//	}
-//	
+	protected Sede getFakeSede() {
+		logger.info("AbstractRepositoryTest.getFakeSede - START");    	
+
+		Sede testSede = new Sede();
+		int random = (int) (Math.random() * 10000);
+		testSede.setCitta("citta"+random);
+		testSede.setRegione("Regione"+random);
+		testSede.setAzienda(getFakeAzienda());
+		sedeRepository.save(testSede);
+//		logger.error("AbstractRepositoryTest.getFakeSede - Debug:"+testSede.getId());    	
+		logger.info("AbstractRepositoryTest.getFakeSede - END");    	
+		return testSede;
+	}
 	
 }
