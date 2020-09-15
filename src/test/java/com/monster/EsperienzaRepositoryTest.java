@@ -38,8 +38,7 @@ public class EsperienzaRepositoryTest extends AbstractRepositoryTest{
 	public void testSelectById() {
     	logger.info("EsperienzaRepositoryTest.testSelectById() - START");    	
     	Esperienza currentEsperienza = getFakeEsperienza();
-    	System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    	System.out.println(getFakeEsperienza().toString());
+    	logger.info("EsperienzaRepositoryTest.testSelectById() - Debug "+getFakeEsperienza().toString());    	
     	logger.info("EsperienzaRepositoryTest.testSelectById() - Debug "+currentEsperienza.toString());    	
     	Assertions.assertTrue(esperienzaRT.findById(currentEsperienza.getId()).isPresent());	
 		logger.info("EsperienzaRepositoryTest.testSelectById() - END");
@@ -75,7 +74,10 @@ public class EsperienzaRepositoryTest extends AbstractRepositoryTest{
 		int random = (int) (Math.random() * 10000);
 		String name = "AziendaProva" + random;
 		getFakeEsperienzaWithNameAzienda(name);
-		Assertions.assertTrue(esperienzaRT.findByNomeAzienda(name).getNomeAzienda().equals(name));
+//		Assertions.assertTrue(esperienzaRT.findByNomeAzienda(name).getNomeAzienda().equals(name));
+		
+		Assertions.assertTrue(esperienzaRT.findByNomeAzienda(name).get(0).getNomeAzienda().equals(name));
+
 		logger.info("EsperienzaRepositoryTest.testSelectByNameAzienda() - END");
 		
 	}
