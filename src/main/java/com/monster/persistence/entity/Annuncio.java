@@ -17,6 +17,7 @@ public class Annuncio {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String contratto;
@@ -112,6 +113,13 @@ public class Annuncio {
 		candidatura.setAnnuncio(null);
 
 		return candidatura;
+	}
+
+	@Override
+	public String toString() {
+		return "Annuncio [id=" + id + ", contratto=" + contratto + ", dataPubblicazione=" + dataPubblicazione
+				+ ", descrizione=" + descrizione + ", sede=" + sede + ", settore=" + settore + ", candidaturas="
+				+ candidaturas + "]";
 	}
 
 }

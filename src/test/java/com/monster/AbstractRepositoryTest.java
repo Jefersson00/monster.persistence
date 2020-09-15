@@ -35,6 +35,7 @@ public abstract class AbstractRepositoryTest {
 	private SettoreRepository settoreRepository;
 
 
+//--------------Utente-----------
 	protected Utente getFakeUtente() {
 		logger.info("AbstractRepositoryTest.getFakeUtente - START");    	
 		int random = (int) (Math.random() * 10000);
@@ -64,6 +65,8 @@ public abstract class AbstractRepositoryTest {
 		return testUtente;
 		
 	}
+	
+//--------------Azienda-----------
 	
 	protected Azienda getFakeAzienda() {
 		logger.info("AbstractRepositoryTest.getFakeAzienda - START");    	
@@ -113,6 +116,8 @@ public abstract class AbstractRepositoryTest {
 		logger.info("AbstractRepositoryTest.getFakeAziendaWithNameAndEmail - END");    	
 		return testAzienda;
 	}
+
+//--------------Sede-----------
 	
 	protected Sede getFakeSede() {
 		logger.info("AbstractRepositoryTest.getFakeSede - START");    	
@@ -128,7 +133,7 @@ public abstract class AbstractRepositoryTest {
 		return testSede;
 	}
 	
-	//--------------Settore-----------
+//--------------Settore-----------
 	
 		protected Settore getFakeSettore() {
 			logger.info("AbstractRepositoryTest.getFakeSettore - START");    	
@@ -139,14 +144,14 @@ public abstract class AbstractRepositoryTest {
 		}
 		
 		protected Settore getFakeSettoreWithName(String name) {
-			logger.info("AbstractRepositoryTest.getFakeSettoreWithNameAndEmail - START");    	
+			logger.info("AbstractRepositoryTest.getFakeSettoreWithName - START");    	
 			Settore testSettore = new Settore();
 			//int random = (int) (Math.random() * 10000);
 			testSettore.setNome(name);
 			testSettore.setDescrizione("descrizione settore");
 			settoreRepository.save(testSettore);
 //			logger.error("AbstractRepositoryTest.getFakeSettoreWithNameAndEmail - Debug:"+testSettore.getId()+"--"+testSettore.getEmail());    	
-			logger.info("AbstractRepositoryTest.getFakeSettoreWithNameAndEmail - END");    	
+			logger.info("AbstractRepositoryTest.getFakeSettoreWithName - END");    	
 			return testSettore;
 		}
 		

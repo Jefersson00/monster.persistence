@@ -55,4 +55,9 @@ public class Candidatura implements Serializable {
 		this.utente = utente;
 	}
 
+	@Override
+	public String toString() {
+		return "Candidatura [id=" + id + ", annuncio=" + annuncio.getSede() + ", utente=" + utente.getNome() + "]";
+	}
+
 }

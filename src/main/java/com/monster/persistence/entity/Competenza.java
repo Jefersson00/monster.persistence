@@ -16,6 +16,7 @@ public class Competenza implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String descrizione;
@@ -73,6 +74,12 @@ public class Competenza implements Serializable {
 		utenteCompetenza.setCompetenza(null);
 
 		return utenteCompetenza;
+	}
+
+	@Override
+	public String toString() {
+		return "Competenza [id=" + id + ", descrizione=" + descrizione + ", nome=" + nome + ", utenteCompetenzas="
+				+ utenteCompetenzas + "]";
 	}
 
 }

@@ -16,6 +16,7 @@ public class PercorsoFormativo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String descrizione;
@@ -73,6 +74,12 @@ public class PercorsoFormativo implements Serializable {
 		utentePercorso.setPercorsoFormativo(null);
 
 		return utentePercorso;
+	}
+
+	@Override
+	public String toString() {
+		return "PercorsoFormativo [id=" + id + ", descrizione=" + descrizione + ", formazione=" + formazione
+				+ ", utentePercorsos=" + utentePercorsos + "]";
 	}
 
 }

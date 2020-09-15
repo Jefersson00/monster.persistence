@@ -16,6 +16,7 @@ public class UtenteEsperienza implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@Temporal(TemporalType.DATE)
@@ -77,6 +78,12 @@ public class UtenteEsperienza implements Serializable {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
+	}
+
+	@Override
+	public String toString() {
+		return "UtenteEsperienza [id=" + id + ", dataFine=" + dataFine + ", dataInizio=" + dataInizio + ", esperienza="
+				+ esperienza + ", utente=" + utente + "]";
 	}
 
 }

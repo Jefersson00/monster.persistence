@@ -16,6 +16,7 @@ public class Esperienza implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String descrizione;
@@ -74,6 +75,12 @@ public class Esperienza implements Serializable {
 		utenteEsperienza.setEsperienza(null);
 
 		return utenteEsperienza;
+	}
+
+	@Override
+	public String toString() {
+		return "Esperienza [id=" + id + ", descrizione=" + descrizione + ", nomeAzienda=" + nomeAzienda
+				+ ", utenteEsperienzas=" + utenteEsperienzas + "]";
 	}
 
 }

@@ -15,6 +15,7 @@ public class UtentePercorso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	//bi-directional many-to-one association to PercorsoFormativo
@@ -52,6 +53,11 @@ public class UtentePercorso implements Serializable {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
+	}
+
+	@Override
+	public String toString() {
+		return "UtentePercorso [id=" + id + ", percorsoFormativo=" + percorsoFormativo + ", utente=" + utente + "]";
 	}
 
 }

@@ -89,4 +89,10 @@ public class Sede implements Serializable {
 		this.azienda = azienda;
 	}
 
+	@Override
+	public String toString() {
+		return "Sede [id=" + id + ", citta=" + citta + ", regione=" + regione + ", annuncios=" + annuncios
+				+ ", azienda=" + azienda + "]";
+	}
+
 }
