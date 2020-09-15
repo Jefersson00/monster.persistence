@@ -76,4 +76,10 @@ public class Settore implements Serializable {
 		return annuncio;
 	}
 
+	@Override
+	public String toString() {
+		return "Settore [id=" + id + ", descrizione=" + descrizione + ", nome=" + nome + ", annuncios=" + annuncios
+				+ "]";
+	}
+
 }
