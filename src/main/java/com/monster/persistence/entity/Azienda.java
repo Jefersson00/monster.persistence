@@ -25,6 +25,7 @@ public class Azienda implements Serializable {
 	private Date annoFondazione;
 
 	private String descrizione;
+	
 
 	private String email;
 
