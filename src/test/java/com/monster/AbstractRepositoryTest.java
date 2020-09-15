@@ -40,6 +40,16 @@ public abstract class AbstractRepositoryTest {
 	private EsperienzaRepository esperienzaRepository;
 
 //--------------Utente-----------
+	
+	
+
+	/**
+	 * atenzione per eventuali modifiche future il numero di telefono puo avere 15
+	 * caratteri , da efettuare controllo sul backend e persistence sul fatto che
+	 * questo valore avvia meno di 15 caratteri
+	 * 
+	 */
+	
 	protected Utente getFakeUtente() {
 		logger.info("AbstractRepositoryTest.getFakeUtente - START");
 		int random = (int) (Math.random() * 10000);
@@ -60,8 +70,8 @@ public abstract class AbstractRepositoryTest {
 		testUtente.setPassword("passProva");
 
 		utenteRepository.save(testUtente);
-		System.out.println(testUtente.toString());
-		logger.error("AbstractRepositoryTest.getFakeUtenteWithEmailAndPhone - Debug:" + testUtente.getId() + "--"
+		logger.info("AbstractRepositoryTest.getFakeUtenteWithEmailAndPhone - Debug:" + testUtente.toString());
+		logger.debug("AbstractRepositoryTest.getFakeUtenteWithEmailAndPhone - Debug:" + testUtente.getId() + "--"
 				+ testUtente.getEmail());
 
 		logger.info("AbstractRepositoryTest.getFakeUtenteWithEmailAndPhone - END");
