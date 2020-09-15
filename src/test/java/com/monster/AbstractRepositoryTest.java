@@ -15,6 +15,7 @@ import com.monster.persistence.entity.Utente;
 import com.monster.repository.AnnuncioRepository;
 import com.monster.repository.AziendaRepository;
 import com.monster.repository.SedeRepository;
+import com.monster.repository.SettoreRepository;
 import com.monster.repository.UtenteRepository;
 
 public abstract class AbstractRepositoryTest {
@@ -29,6 +30,9 @@ public abstract class AbstractRepositoryTest {
 	
 	@Autowired
 	private SedeRepository sedeRepository;
+	
+	@Autowired
+	private SettoreRepository settoreRepository;
 
 
 	protected Utente getFakeUtente() {
@@ -123,5 +127,28 @@ public abstract class AbstractRepositoryTest {
 		logger.info("AbstractRepositoryTest.getFakeSede - END");    	
 		return testSede;
 	}
+	
+	//--------------Settore-----------
+	
+		protected Settore getFakeSettore() {
+			logger.info("AbstractRepositoryTest.getFakeSettore - START");    	
+			int random = (int) (Math.random() * 10000);
+			logger.info("AbstractRepositoryTest.getFakeSettore - END");    	
+			return getFakeSettoreWithName("nameRandom"+random);
+			
+		}
+		
+		protected Settore getFakeSettoreWithName(String name) {
+			logger.info("AbstractRepositoryTest.getFakeSettoreWithNameAndEmail - START");    	
+			Settore testSettore = new Settore();
+			//int random = (int) (Math.random() * 10000);
+			testSettore.setNome(name);
+			testSettore.setDescrizione("descrizione settore");
+			settoreRepository.save(testSettore);
+//			logger.error("AbstractRepositoryTest.getFakeSettoreWithNameAndEmail - Debug:"+testSettore.getId()+"--"+testSettore.getEmail());    	
+			logger.info("AbstractRepositoryTest.getFakeSettoreWithNameAndEmail - END");    	
+			return testSettore;
+		}
+		
 	
 }
