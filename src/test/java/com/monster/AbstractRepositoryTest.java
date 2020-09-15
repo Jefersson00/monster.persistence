@@ -94,7 +94,7 @@ public abstract class AbstractRepositoryTest {
 		testAzienda.setEmail(email);
 		testAzienda.setPassword("pswTest");
 		testAzienda.setNome(name);
-		testAzienda.setDecrizione("descrizione azienda");
+		testAzienda.setDescrizione("descrizione azienda");
 		testAzienda.setNumeroDipendenti(random);
 		testAzienda.setLink("testLinkAzienda");
 		testAzienda.setLogo("testLogoAzienda");

@@ -99,10 +99,10 @@ public class AziendaRepositoryTest extends AbstractRepositoryTest {
 		logger.info("AziendaRepositoryTest.testUpdate() - START");
 		Azienda currentAzienda = getFakeAzienda();
 		String descrizione ="modifica descrizione test";
-		currentAzienda.setDecrizione(descrizione);
+		currentAzienda.setDescrizione(descrizione);
 		aziendaRT.save(currentAzienda);
 		Assertions.assertTrue(aziendaRT.findById(currentAzienda.getId()).isPresent());	
-		Assertions.assertTrue(aziendaRT.findById(currentAzienda.getId()).get().getDecrizione().equals(descrizione));
+		Assertions.assertTrue(aziendaRT.findById(currentAzienda.getId()).get().getDescrizione().equals(descrizione));
 		logger.info("AziendaRepositoryTest.testUpdate() - END");
 	}
 	

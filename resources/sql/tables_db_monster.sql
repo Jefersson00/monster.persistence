@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `azienda`;
 CREATE TABLE IF NOT EXISTS `azienda` (
   `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `decrizione` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `descrizione` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   `link` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,

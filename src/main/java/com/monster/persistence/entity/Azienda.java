@@ -24,7 +24,7 @@ public class Azienda implements Serializable {
 	@Column(name="anno_fondazione")
 	private Date annoFondazione;
 
-	private String decrizione;
+	private String descrizione;
 
 	private String email;
 
@@ -64,12 +64,12 @@ public class Azienda implements Serializable {
 		this.annoFondazione = annoFondazione;
 	}
 
-	public String getDecrizione() {
-		return this.decrizione;
+	public String getDescrizione() {
+		return this.descrizione;
 	}
 
-	public void setDecrizione(String decrizione) {
-		this.decrizione = decrizione;
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
 	}
 
 	public String getEmail() {
@@ -157,8 +157,8 @@ public class Azienda implements Serializable {
 		builder.append(id);
 		builder.append(", annoFondazione=");
 		builder.append(annoFondazione);
-		builder.append(", decrizione=");
-		builder.append(decrizione);
+		builder.append(", descrizione=");
+		builder.append(descrizione);
 		builder.append(", email=");
 		builder.append(email);
 		builder.append(", link=");
