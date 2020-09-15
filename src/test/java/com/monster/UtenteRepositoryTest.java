@@ -20,7 +20,7 @@ import com.monster.repository.UtenteRepository;
 @SpringBootTest
 public class UtenteRepositoryTest extends AbstractRepositoryTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(AziendaRepositoryTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(UtenteRepositoryTest.class);
 
 	@Autowired
 	UtenteRepository utenteRT;
@@ -30,7 +30,6 @@ public class UtenteRepositoryTest extends AbstractRepositoryTest {
 	public void initializeUtenteTest() {
 		logger.info("UtenteRepositoryTest.initializeUtenteTest - START");
 		utenteRT.deleteAll();
-		getFakeUtente();
 		logger.info("UtenteRepositoryTest.initializeUtenteTest - END");
 	}
 
@@ -39,8 +38,8 @@ public class UtenteRepositoryTest extends AbstractRepositoryTest {
 		logger.info("UtenteRepositoryTest.testSelectByName() - START");
 
 		Utente currentUtente = getFakeUtente();
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(currentUtente.toString());
+//		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+//		System.out.println(currentUtente.toString());
 		logger.info("UtenteRepositoryTest.testSelectByName() - Debug " + currentUtente.toString());
 		Assertions.assertTrue(utenteRT.findById(currentUtente.getId()).isPresent());
 		logger.info("UtenteRepositoryTest.testSelectByName() - END");

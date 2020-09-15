@@ -1,7 +1,6 @@
 package com.monster;
 //MarcoBraia marco.braia.mb@gmail.com
 //in fase di sviluppo
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -30,7 +29,6 @@ public class CandidaturaRepositoryTest extends AbstractRepositoryTest {
 	public void initializeCandidaturaTest() {
 		logger.info("CandidaturaRepositoryTest.initializeCandidaturaTest - START");		
 		candidaturaRT.deleteAll();
-		//getFakeCandidatura();
 		logger.info("CandidaturaRepositoryTest.initializeCandidaturaTest - END");
 	}
 	

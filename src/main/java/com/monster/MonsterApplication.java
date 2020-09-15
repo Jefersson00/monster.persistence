@@ -12,7 +12,6 @@ import org.springframework.context.ApplicationContext;
  * 
  * Spring application main class.
  * 
- * Used for tests.
  * 
  * @author jeferssonserrano00@gmail.com
  *

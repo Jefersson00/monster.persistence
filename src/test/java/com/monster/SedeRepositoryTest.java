@@ -1,6 +1,5 @@
 package com.monster;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +14,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.monster.repository.AziendaRepository;
 import com.monster.repository.SedeRepository;
-import com.monster.repository.UtenteRepository;
 
 
 @ExtendWith(SpringExtension.class)
@@ -43,7 +41,6 @@ class SedeRepositoryTest extends AbstractRepositoryTest{
 		logger.info("SedeRepositoryTest.initializeSedeTest - END");
 	}
 	
-	
 	@Test
     public void testSelectAllFilled(){
     	logger.info("SedeRepositoryTest.testSelectAllFilled() - START");    	
@@ -51,7 +48,6 @@ class SedeRepositoryTest extends AbstractRepositoryTest{
     	Assertions.assertTrue(sedeRT.count() == 1);
     	logger.info("SedeRepositoryTest.testSelectAllFilled() - END");
     }
-	
 	
 	@Test
     public void testSelectAllEmpty(){

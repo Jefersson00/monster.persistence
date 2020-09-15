@@ -31,7 +31,6 @@ public class SettoreRepositoryTest extends AbstractRepositoryTest {
 	public void initializeSettoreTest() {
 		logger.info("SettoreRepositoryTest.initializeSettoreTest - START");		
 		settoreRT.deleteAll();
-		//getFakeSettore();
 		logger.info("SettoreRepositoryTest.initializeSettoreTest - END");
 	}
 	
@@ -39,8 +38,7 @@ public class SettoreRepositoryTest extends AbstractRepositoryTest {
 	public void testSelectById() {
     	logger.info("SettoreRepositoryTest.testSelectById() - START");    	
     	Settore currentSettore = getFakeSettore();
-    	System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    	System.out.println(getFakeSettore().toString());
+    	logger.info("SettoreRepositoryTest.testSelectById() - Debug "+getFakeSettore().toString());    	
     	logger.info("SettoreRepositoryTest.testSelectById() - Debug "+currentSettore.toString());    	
     	Assertions.assertTrue(settoreRT.findById(currentSettore.getId()).isPresent());	
 		logger.info("SettoreRepositoryTest.testSelectById() - END");
