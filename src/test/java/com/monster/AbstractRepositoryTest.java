@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.monster.persistence.entity.Annuncio;
 import com.monster.persistence.entity.Azienda;
+import com.monster.persistence.entity.Esperienza;
 import com.monster.persistence.entity.Sede;
 import com.monster.persistence.entity.Settore;
 import com.monster.persistence.entity.Utente;
 import com.monster.repository.AnnuncioRepository;
 import com.monster.repository.AziendaRepository;
+import com.monster.repository.EsperienzaRepository;
 import com.monster.repository.SedeRepository;
 import com.monster.repository.SettoreRepository;
 import com.monster.repository.UtenteRepository;
@@ -33,6 +35,9 @@ public abstract class AbstractRepositoryTest {
 	
 	@Autowired
 	private SettoreRepository settoreRepository;
+	
+	@Autowired
+	private EsperienzaRepository esperienzaRepository;
 
 
 //--------------Utente-----------
@@ -155,5 +160,23 @@ public abstract class AbstractRepositoryTest {
 			return testSettore;
 		}
 		
-	
+//--------------Esperienza---------------
+		
+		protected Esperienza getFakeEsperienza() {
+			logger.info("AbstractRepositoryTest.getFakeEspierienza - START");
+			int random = (int) (Math.random()* 10000);
+			logger.info("AbstractRepositoryTest.getFakeEspierienza - END");
+			return getFakeEsperienzaWithNameAzienda("nameRandom"+random);
+		}
+		
+		protected Esperienza getFakeEsperienzaWithNameAzienda(String name) {
+			logger.info("AbstractRepositoryTest.getFakeEspierienzaWithNameAzienda - START");
+			Esperienza testEsperienza = new Esperienza();
+			testEsperienza.setNomeAzienda(name);
+			testEsperienza.setDescrizione("descrizione");
+			esperienzaRepository.save(testEsperienza);
+			logger.info("AbstractRepositoryTest.getFakeEspierienzaWithNameAzienda - END");
+			return testEsperienza;
+			
+		}
 }
