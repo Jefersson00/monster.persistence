@@ -9,12 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.monster.persistence.entity.Annuncio;
 import com.monster.persistence.entity.Azienda;
+import com.monster.persistence.entity.Candidatura;
+import com.monster.persistence.entity.Competenza;
 import com.monster.persistence.entity.Esperienza;
 import com.monster.persistence.entity.Sede;
 import com.monster.persistence.entity.Settore;
 import com.monster.persistence.entity.Utente;
 import com.monster.repository.AnnuncioRepository;
 import com.monster.repository.AziendaRepository;
+import com.monster.repository.CandidaturaRepository;
+import com.monster.repository.CompetenzaRepository;
 import com.monster.repository.EsperienzaRepository;
 import com.monster.repository.SedeRepository;
 import com.monster.repository.SettoreRepository;
@@ -41,6 +45,12 @@ public abstract class AbstractRepositoryTest {
 	
 	@Autowired
 	private AnnuncioRepository annuncioRepository;
+	
+	@Autowired
+	private CandidaturaRepository candidaturaRepository;
+	
+	@Autowired
+	private CompetenzaRepository competenzaRepository;
 
 //--------------Utente-----------
 	
@@ -216,4 +226,61 @@ public abstract class AbstractRepositoryTest {
 		return testAnnuncio;
 
 	}
+	
+//--------------Candidatura---------------
+	
+	protected Candidatura getFakeCandidaturaWithAnnuncioAndUtente(Annuncio annuncio, Utente utente) {
+		logger.info("AbstractRepositoryTest.getFakeCandidaturaWithAnnuncioAndUtente - START");
+		Candidatura testCandidatura=new Candidatura();
+		testCandidatura.setAnnuncio(annuncio);
+		testCandidatura.setUtente(utente);
+		candidaturaRepository.save(testCandidatura);
+		logger.info("AbstractRepositoryTest.getFakeCandidaturaWithAnnuncioAndUtente - Debug:" + testCandidatura.toString());
+		logger.debug("AbstractRepositoryTest.getFakeCandidaturaWithAnnuncioAndUtente - Debug:" + testCandidatura.getId() + "--");
+		logger.info("AbstractRepositoryTest.getFakeCandidaturaWithAnnuncioAndUtente - END");
+		return testCandidatura;	
+	}
+	
+	protected Candidatura getFakeCandidaturaWithAnnuncio(Annuncio annuncio) {
+		logger.info("AbstractRepositoryTest.getFakeCandidaturaWithAnnuncio - START");
+		Utente utente=getFakeUtente();
+		logger.info("AbstractRepositoryTest.getFakeCandidaturaWithAnnuncio - END");
+		return getFakeCandidaturaWithAnnuncioAndUtente(annuncio,utente);	
+	}
+	
+	protected Candidatura getFakeCandidaturaWithUtente(Utente utente) {
+		logger.info("AbstractRepositoryTest.getFakeCandidaturaWithUtente - START");
+		Annuncio annuncio=getFakeAnnuncio();
+		logger.info("AbstractRepositoryTest.getFakeCandidaturaWithUtente - END");
+		return getFakeCandidaturaWithAnnuncioAndUtente(annuncio,utente);
+	}
+	
+	protected Candidatura getFakeCandidatura() {
+		logger.info("AbstractRepositoryTest.getFakeCandidatura - START");
+		Annuncio annuncio=getFakeAnnuncio();
+		Utente utente=getFakeUtente();
+		logger.info("AbstractRepositoryTest.getFakeCandidatura - END");
+		return getFakeCandidaturaWithAnnuncioAndUtente(annuncio,utente);
+	}
+	
+//--------------Competenza---------------
+	
+	protected Competenza getFakeCompetenza() {
+		logger.info("AbstractRepositoryTest.getFakeCompetenza - START");
+		int random = (int) (Math.random() * 10000);
+		logger.info("AbstractRepositoryTest.getFakeCompetenza - END");
+		return getFakeCompetenzaWithName("nameRandom" + random);
+
+	}
+
+	protected Competenza getFakeCompetenzaWithName(String name) {
+		logger.info("AbstractRepositoryTest.getFakeCompetenzaWithName - START");
+		Competenza testCompetenza = new Competenza();
+		testCompetenza.setNome(name);
+		testCompetenza.setDescrizione("descrizione competenza");
+		competenzaRepository.save(testCompetenza);  	
+		logger.info("AbstractRepositoryTest.getFakeCompetenzaWithName - END");
+		return testCompetenza;
+	}
+	
 }

@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.monster.persistence.entity.Annuncio;
+import com.monster.persistence.entity.Candidatura;
+import com.monster.persistence.entity.Utente;
 import com.monster.repository.CandidaturaRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -33,8 +36,92 @@ public class CandidaturaRepositoryTest extends AbstractRepositoryTest {
 	}
 	
 	@Test
-	void test() {
-		Assertions.assertTrue(true);
+	public void testSelectById() {
+    	logger.info("CandidaturaRepositoryTest.testSelectById() - START");    	
+    	Candidatura currentCandidatura = getFakeCandidatura();
+    	logger.info("CandidaturaRepositoryTest.testSelectById() - Debug "+getFakeCandidatura().toString());    	
+    	logger.info("CandidaturaRepositoryTest.testSelectById() - Debug "+currentCandidatura.toString());    	
+    	Assertions.assertTrue(candidaturaRT.findById(currentCandidatura.getId()).isPresent());	
+		logger.info("CandidaturaRepositoryTest.testSelectById() - END");
+	}
+	
+	@Test
+    public void testSelectAllFilled(){
+    	logger.info("CandidaturaRepositoryTest.testSelectAllFilled() - START");    	
+    	getFakeCandidatura();
+    	Assertions.assertTrue(candidaturaRT.count() == 1);
+    	logger.info("CandidaturaRepositoryTest.testSelectAllFilled() - END");
+    }
+	
+	@Test
+    public void testSelectAllEmpty(){
+    	logger.info("CandidaturaRepositoryTest.testSelectAllEmpty() - START");    	
+    	Assertions.assertTrue(candidaturaRT.count()==0);
+		logger.info("CandidaturaRepositoryTest.testSelectAllEmpty() - END");
+    }
+	
+	
+	@Test
+	public void testInsert() {
+    	logger.info("CandidaturaRepositoryTest.testInsert() - START");    	
+    	Assertions.assertTrue(candidaturaRT.count()==0);
+    	getFakeCandidatura();
+		Assertions.assertTrue(candidaturaRT.count()==1);
+		logger.info("CandidaturaRepositoryTest.testInsert() - END");
+	}
+	
+	
+	@Test
+	public void testSelectByAnnuncio() {
+    	logger.info("CandidaturaRepositoryTest.testSelectByAnnuncio() - START");
+    	Annuncio annuncio = getFakeAnnuncio();
+    	getFakeCandidaturaWithAnnuncio(annuncio);
+		Assertions.assertTrue(candidaturaRT.findByAnnuncio(annuncio).get(0).getAnnuncio().getId()==annuncio.getId());	
+		logger.info("CandidaturaRepositoryTest.testSelectByAnnuncio() - END");
+	}
+	
+	@Test
+	public void testSelectByUtente() {
+    	logger.info("CandidaturaRepositoryTest.testSelectByUtente() - START");
+    	Utente utente = getFakeUtente();
+    	getFakeCandidaturaWithUtente(utente);
+		Assertions.assertTrue(candidaturaRT.findByUtente(utente).get(0).getUtente().getId()==utente.getId());	
+		logger.info("CandidaturaRepositoryTest.testSelectByUtente() - END");
+	}
+	
+	/* devo pensare ad un test update per la tabella unione
+	@Test
+	public void testUpdate() {
+		logger.info("CandidaturaRepositoryTest.testUpdate() - START");
+		Candidatura currentCandidatura = getFakeCandidatura();
+		String descrizione ="modifica descrizione test";
+		currentCandidatura.setDescrizione(descrizione);
+		candidaturaRT.save(currentCandidatura);
+		Assertions.assertTrue(candidaturaRT.findById(currentCandidatura.getId()).isPresent());	
+		Assertions.assertTrue(candidaturaRT.findById(currentCandidatura.getId()).get().getDescrizione().equals(descrizione));
+		logger.info("CandidaturaRepositoryTest.testUpdate() - END");
+	}*/
+	
+	@Test
+	public void testDeleteById() {
+    	logger.info("CandidaturaRepositoryTest.testDeleteById() - START");    	
+    	Candidatura currentCandidatura = getFakeCandidatura();
+    	Assertions.assertTrue(candidaturaRT.count()==1);
+    	candidaturaRT.deleteById(currentCandidatura.getId());
+    	Assertions.assertTrue(candidaturaRT.count()==0);
+    	logger.info("CandidaturaRepositoryTest.testDeleteById() - END");
+	}
+	
+	@Test
+	public void testDeleteAll () {
+    	logger.info("CandidaturaRepositoryTest.testDeleteAll() - START");    	
+    	getFakeCandidatura();
+    	Assertions.assertTrue(candidaturaRT.count()==1);
+    	getFakeCandidatura();
+    	Assertions.assertTrue(candidaturaRT.count()==2);
+    	candidaturaRT.deleteAll();
+		Assertions.assertTrue(candidaturaRT.count()==0);
+		logger.info("CandidaturaRepositoryTest.testDeleteAll() - END");
 	}
 
 }

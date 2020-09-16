@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `candidatura` (
 -- Dump della struttura di tabella monster.competenza
 DROP TABLE IF EXISTS `competenza`;
 CREATE TABLE IF NOT EXISTS `competenza` (
-  `id` bigint(11) NOT NULL,
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `descrizione` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
