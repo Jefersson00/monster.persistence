@@ -12,9 +12,13 @@ import com.monster.persistence.entity.Azienda;
 import com.monster.persistence.entity.Candidatura;
 import com.monster.persistence.entity.Competenza;
 import com.monster.persistence.entity.Esperienza;
+import com.monster.persistence.entity.PercorsoFormativo;
 import com.monster.persistence.entity.Sede;
 import com.monster.persistence.entity.Settore;
 import com.monster.persistence.entity.Utente;
+import com.monster.persistence.entity.UtenteCompetenza;
+import com.monster.persistence.entity.UtenteEsperienza;
+import com.monster.persistence.entity.UtentePercorso;
 import com.monster.repository.AnnuncioRepository;
 import com.monster.repository.AziendaRepository;
 import com.monster.repository.CandidaturaRepository;
@@ -22,6 +26,8 @@ import com.monster.repository.CompetenzaRepository;
 import com.monster.repository.EsperienzaRepository;
 import com.monster.repository.SedeRepository;
 import com.monster.repository.SettoreRepository;
+import com.monster.repository.UtenteEsperienzaRepository;
+import com.monster.repository.UtentePercorsoRepository;
 import com.monster.repository.UtenteRepository;
 
 public abstract class AbstractRepositoryTest {
@@ -51,6 +57,12 @@ public abstract class AbstractRepositoryTest {
 	
 	@Autowired
 	private CompetenzaRepository competenzaRepository;
+	
+	@Autowired
+	private UtenteEsperienzaRepository utenteEsperienzaRepository;
+	
+	@Autowired
+	private UtentePercorsoRepository utentePercorsoRepository;
 
 //--------------Utente-----------
 	
@@ -281,6 +293,44 @@ public abstract class AbstractRepositoryTest {
 		competenzaRepository.save(testCompetenza);  	
 		logger.info("AbstractRepositoryTest.getFakeCompetenzaWithName - END");
 		return testCompetenza;
+	}
+	//--------------UtenteCompetenza-----------
+	
+	protected UtenteCompetenza getFakeUtenteCompetenza() {
+		
+		UtenteCompetenza utenteCompetenza = new UtenteCompetenza();
+		utenteCompetenza.setUtente(getFakeUtente());
+		utenteCompetenza.setCompetenza(getFakeCompetenza());
+	
+		return utenteCompetenza;
+	}
+	//--------------UtenteEsperienza-----------
+	
+	protected UtenteEsperienza getFakeUtenteEsperienza() {
+		Esperienza fakeEsperienza = new Esperienza();
+		fakeEsperienza.setDescrizione("fakeEsperienza");
+		fakeEsperienza.setNomeAzienda("fakeAzienda");
+	
+		UtenteEsperienza utenteEsperienza = new UtenteEsperienza();
+		utenteEsperienza.setDataFine(new Date());
+		utenteEsperienza.setDataFine(new Date());
+		utenteEsperienza.setEsperienza(fakeEsperienza);
+		utenteEsperienzaRepository.save(utenteEsperienza);
+		return utenteEsperienza;
+		
+	}
+	//--------------UtentePercorso-----------
+	protected UtentePercorso getFakeUtentePercorso() {
+		
+		PercorsoFormativo fakePercorso = new PercorsoFormativo();
+		fakePercorso.setDescrizione("fakeDescrizione");
+		fakePercorso.setFormazione("fakeFormazione");
+		UtentePercorso utentePercorso = new UtentePercorso();
+		utentePercorso.setPercorsoFormativo(fakePercorso);
+		utentePercorso.setUtente(getFakeUtente());
+		utentePercorsoRepository.save(utentePercorso);
+
+		return utentePercorso;
 	}
 	
 }

@@ -1,0 +1,15 @@
+package com.monster.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.monster.persistence.entity.UtentePercorso;
+@Repository
+public interface UtentePercorsoRepository extends JpaRepository<UtentePercorso, Long> {
+
+	List<UtentePercorso> findByPercorsoFormativo_Id(long id);
+	
+	List<UtentePercorso> findByUtente_Id(long id);
+}
