@@ -30,7 +30,7 @@ public class AziendaRepositoryTest extends AbstractRepositoryTest {
 	public void initializeAziendaTest() {
 		logger.info("AziendaRepositoryTest.initializeAziendaTest - START");		
 		aziendaRT.deleteAll();
-		//getFakeAzienda();
+//		getFakeAzienda();
 		logger.info("AziendaRepositoryTest.initializeAziendaTest - END");
 	}
 
@@ -51,7 +51,7 @@ public class AziendaRepositoryTest extends AbstractRepositoryTest {
     	logger.info("AziendaRepositoryTest.testSelectAllFilled() - START");    	
     	
     	getFakeAzienda();
-//    	System.out.println(aziendaRT.count());
+    	System.out.println(aziendaRT.count());
     	Assertions.assertTrue(aziendaRT.count() == 1);
     	logger.info("AziendaRepositoryTest.testSelectAllFilled() - END");
     }

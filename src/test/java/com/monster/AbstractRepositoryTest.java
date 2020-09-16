@@ -38,6 +38,9 @@ public abstract class AbstractRepositoryTest {
 
 	@Autowired
 	private EsperienzaRepository esperienzaRepository;
+	
+	@Autowired
+	private AnnuncioRepository annuncioRepository;
 
 //--------------Utente-----------
 	
@@ -162,7 +165,7 @@ public abstract class AbstractRepositoryTest {
 		testSettore.setNome(name);
 		testSettore.setDescrizione("descrizione settore");
 		settoreRepository.save(testSettore);
-//			logger.error("AbstractRepositoryTest.getFakeSettoreWithNameAndEmail - Debug:"+testSettore.getId()+"--"+testSettore.getEmail());    	
+//		logger.error("AbstractRepositoryTest.getFakeSettoreWithNameAndEmail - Debug:"+testSettore.getId()+"--"+testSettore.getEmail());    	
 		logger.info("AbstractRepositoryTest.getFakeSettoreWithName - END");
 		return testSettore;
 	}
@@ -184,5 +187,33 @@ public abstract class AbstractRepositoryTest {
 		esperienzaRepository.save(testEsperienza);
 		logger.info("AbstractRepositoryTest.getFakeEspierienzaWithNameAzienda - END");
 		return testEsperienza;
+	}
+	
+//-------------------------Annunicio---------------------------
+	protected Annuncio getFakeAnnuncio() {
+		logger.info("AbstractRepositoryTest.getFakeAnnucio - START");
+		int random = (int) (Math.random() * 10000);
+		logger.info("AbstractRepositoryTest.getFakeAnnucio - END");
+		return getFakeAnnuncioWithContratto("contratto" + random);
+
+	}
+
+	protected Annuncio getFakeAnnuncioWithContratto(String contratto) {
+		logger.info("AbstractRepositoryTest.getFakeUtenteWithContratto - START");
+
+		Annuncio testAnnuncio= new Annuncio();
+
+		testAnnuncio.setDescrizione("descrizione di prova");
+		testAnnuncio.setContratto(contratto);
+		testAnnuncio.setSettore(getFakeSettore());
+		testAnnuncio.setSede(getFakeSede());
+
+		annuncioRepository.save(testAnnuncio);
+		logger.info("AbstractRepositoryTest.getFakeUtenteWithContratto - Debug:" + testAnnuncio.toString());
+		logger.debug("AbstractRepositoryTest.getFakeUtenteWithContratto - Debug:" + testAnnuncio.getId() + "--");
+
+		logger.info("AbstractRepositoryTest.getFakeUtenteWithContratto - END");
+		return testAnnuncio;
+
 	}
 }
