@@ -24,6 +24,7 @@ import com.monster.repository.AziendaRepository;
 import com.monster.repository.CandidaturaRepository;
 import com.monster.repository.CompetenzaRepository;
 import com.monster.repository.EsperienzaRepository;
+import com.monster.repository.PercorsoFormativoRepository;
 import com.monster.repository.SedeRepository;
 import com.monster.repository.SettoreRepository;
 import com.monster.repository.UtenteEsperienzaRepository;
@@ -63,6 +64,9 @@ public abstract class AbstractRepositoryTest {
 	
 	@Autowired
 	private UtentePercorsoRepository utentePercorsoRepository;
+	
+	@Autowired
+	private PercorsoFormativoRepository percorsoFormativoRepository;
 
 //--------------Utente-----------
 	
@@ -332,5 +336,21 @@ public abstract class AbstractRepositoryTest {
 
 		return utentePercorso;
 	}
-	
+	//------------------------PercorsoFormativo-------------------------
+		protected PercorsoFormativo getFakePercorsoFormativo() {
+			logger.info("AbstractRepositoryTest.getFakePercorsoFormativo - START");
+			int random = (int) (Math.random() * 10000);
+			logger.info("AbstractRepositoryTest.getFakePercorsoFormativo - END");
+			return getFakePercorsoFormativoWithFormazione("nameRandom" + random);
+		}
+
+		protected PercorsoFormativo getFakePercorsoFormativoWithFormazione(String formazione) {
+			logger.info("AbstractRepositoryTest.getFakePercorsoFormativoWithFormazione - START");
+			PercorsoFormativo testPercorsoFormativo = new PercorsoFormativo();
+			testPercorsoFormativo.setFormazione(formazione);
+			testPercorsoFormativo.setDescrizione("descrizione");
+			percorsoFormativoRepository.save(testPercorsoFormativo);
+			logger.info("AbstractRepositoryTest.getFakePercorsoFormativoWithFormazione - END");
+			return testPercorsoFormativo;
+	}
 }
