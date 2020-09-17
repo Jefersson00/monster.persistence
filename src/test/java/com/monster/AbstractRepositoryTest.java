@@ -27,6 +27,7 @@ import com.monster.repository.EsperienzaRepository;
 import com.monster.repository.PercorsoFormativoRepository;
 import com.monster.repository.SedeRepository;
 import com.monster.repository.SettoreRepository;
+import com.monster.repository.UtenteCompetenzaRepository;
 import com.monster.repository.UtenteEsperienzaRepository;
 import com.monster.repository.UtentePercorsoRepository;
 import com.monster.repository.UtenteRepository;
@@ -66,7 +67,12 @@ public abstract class AbstractRepositoryTest {
 	private UtentePercorsoRepository utentePercorsoRepository;
 	
 	@Autowired
+	private UtenteCompetenzaRepository utenteCompetenzaRepository;
+	
+	@Autowired
 	private PercorsoFormativoRepository percorsoFormativoRepository;
+	
+	
 
 //--------------Utente-----------
 	
@@ -328,41 +334,109 @@ public abstract class AbstractRepositoryTest {
 	}
 	//--------------UtenteCompetenza-----------
 	
-	protected UtenteCompetenza getFakeUtenteCompetenza() {
-		
-		UtenteCompetenza utenteCompetenza = new UtenteCompetenza();
-		utenteCompetenza.setUtente(getFakeUtente());
-		utenteCompetenza.setCompetenza(getFakeCompetenza());
-	
-		return utenteCompetenza;
+	protected UtenteCompetenza getFakeUtenteCompetenzaWithUtenteAndCompetenza(Utente utente, Competenza competenza) {
+		logger.info("AbstractRepositoryTest.getFakeUtenteCompetenzaWithUtenteAndCompetenza - START");
+		UtenteCompetenza testUtenteCompetenza=new UtenteCompetenza();
+		testUtenteCompetenza.setCompetenza(competenza);
+		testUtenteCompetenza.setUtente(utente);
+		utenteCompetenzaRepository.save(testUtenteCompetenza);
+		logger.info("AbstractRepositoryTest.getFakeUtenteCompetenzaWithUtenteAndCompetenza - Debug:" + testUtenteCompetenza.toString());
+		logger.debug("AbstractRepositoryTest.getFakeUtenteCompetenzaWithUtenteAndCompetenza - Debug:" + testUtenteCompetenza.getId() + "--");
+		logger.info("AbstractRepositoryTest.getFakeUtenteCompetenzaWithUtenteAndCompetenza - END");
+		return testUtenteCompetenza;	
 	}
+	
+	protected UtenteCompetenza getFakeUtenteCompetenzaWithCompetenza(Competenza competenza) {
+		logger.info("AbstractRepositoryTest.getFakeUtenteCompetenzaWithAnnuncio - START");
+		Utente utente= getFakeUtente();
+		logger.info("AbstractRepositoryTest.getFakeUtenteCompetenzaWithAnnuncio - END");
+		return getFakeUtenteCompetenzaWithUtenteAndCompetenza(utente, competenza);	
+	}
+	
+	protected UtenteCompetenza getFakeUtenteCompetenzaWithUtente(Utente utente) {
+		logger.info("AbstractRepositoryTest.getFakeUtenteCompetenzaWithUtente - START");
+		Competenza competenza= getFakeCompetenza();
+		logger.info("AbstractRepositoryTest.getFakeUtenteCompetenzaWithUtente - END");
+		return getFakeUtenteCompetenzaWithUtenteAndCompetenza(utente, competenza);
+	}
+	
+	protected UtenteCompetenza getFakeUtenteCompetenza() {
+		logger.info("AbstractRepositoryTest.getFakeUtenteCompetenza - START");
+		Utente utente=getFakeUtente();
+		Competenza competenza=getFakeCompetenza();
+		logger.info("AbstractRepositoryTest.getFakeUtenteCompetenza - END");
+		return getFakeUtenteCompetenzaWithUtenteAndCompetenza(utente, competenza);
+	}
+	
 	//--------------UtenteEsperienza-----------
 	
-	protected UtenteEsperienza getFakeUtenteEsperienza() {
-		Esperienza fakeEsperienza = new Esperienza();
-		fakeEsperienza.setDescrizione("fakeEsperienza");
-		fakeEsperienza.setNomeAzienda("fakeAzienda");
-	
-		UtenteEsperienza utenteEsperienza = new UtenteEsperienza();
-		utenteEsperienza.setDataFine(new Date());
-		utenteEsperienza.setDataFine(new Date());
-		utenteEsperienza.setEsperienza(fakeEsperienza);
-		utenteEsperienzaRepository.save(utenteEsperienza);
-		return utenteEsperienza;
-		
+	protected UtenteEsperienza getFakeUtenteEsperienzaWithUtenteAndEsperienza(Utente utente, Esperienza esperienza) {
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithUtenteAndEsperienza - START");
+		UtenteEsperienza testUtenteEsperienza=new UtenteEsperienza();
+		testUtenteEsperienza.setEsperienza(esperienza);
+		testUtenteEsperienza.setUtente(utente);
+		utenteEsperienzaRepository.save(testUtenteEsperienza);
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithUtenteAndEsperienza - Debug:" + testUtenteEsperienza.toString());
+		logger.debug("AbstractRepositoryTest.getFakeUtenteEsperienzaWithUtenteAndEsperienza - Debug:" + testUtenteEsperienza.getId() + "--");
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithUtenteAndEsperienza - END");
+		return testUtenteEsperienza;	
 	}
+	
+	protected UtenteEsperienza getFakeUtenteEsperienzaWithEsperienza(Esperienza esperienza) {
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithAnnuncio - START");
+		Utente utente= getFakeUtente();
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithAnnuncio - END");
+		return getFakeUtenteEsperienzaWithUtenteAndEsperienza(utente, esperienza);	
+	}
+	
+	protected UtenteEsperienza getFakeUtenteEsperienzaWithUtente(Utente utente) {
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithUtente - START");
+		Esperienza esperienza= getFakeEsperienza();
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithUtente - END");
+		return getFakeUtenteEsperienzaWithUtenteAndEsperienza(utente, esperienza);
+	}
+	
+	protected UtenteEsperienza getFakeUtenteEsperienza() {
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienza - START");
+		Utente utente=getFakeUtente();
+		Esperienza esperienza=getFakeEsperienza();
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienza - END");
+		return getFakeUtenteEsperienzaWithUtenteAndEsperienza(utente, esperienza);
+	}
+	
 	//--------------UtentePercorso-----------
+	protected UtentePercorso getFakeUtentePercorsoWithUtenteAndPercorso(Utente utente, PercorsoFormativo percorsoFormativo) {
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithUtenteAndPercorso - START");
+		UtentePercorso testUtentePercorso=new UtentePercorso();
+		testUtentePercorso.setPercorsoFormativo(percorsoFormativo);
+		testUtentePercorso.setUtente(utente);
+		utentePercorsoRepository.save(testUtentePercorso);
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithUtenteAndPercorso - Debug:" + testUtentePercorso.toString());
+		logger.debug("AbstractRepositoryTest.getFakeUtentePercorsoWithUtenteAndPercorso - Debug:" + testUtentePercorso.getId() + "--");
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithUtenteAndPercorso - END");
+		return testUtentePercorso;	
+	}
+	
+	protected UtentePercorso getFakeUtentePercorsoWithPercorso(PercorsoFormativo percorsoFormativo) {
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithAnnuncio - START");
+		Utente utente= getFakeUtente();
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithAnnuncio - END");
+		return getFakeUtentePercorsoWithUtenteAndPercorso(utente, percorsoFormativo);	
+	}
+	
+	protected UtentePercorso getFakeUtentePercorsoWithUtente(Utente utente) {
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithUtente - START");
+		PercorsoFormativo percorsoFormativo= getFakePercorsoFormativo();
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithUtente - END");
+		return getFakeUtentePercorsoWithUtenteAndPercorso(utente, percorsoFormativo);
+	}
+	
 	protected UtentePercorso getFakeUtentePercorso() {
-		
-		PercorsoFormativo fakePercorso = new PercorsoFormativo();
-		fakePercorso.setDescrizione("fakeDescrizione");
-		fakePercorso.setFormazione("fakeFormazione");
-		UtentePercorso utentePercorso = new UtentePercorso();
-		utentePercorso.setPercorsoFormativo(fakePercorso);
-		utentePercorso.setUtente(getFakeUtente());
-		utentePercorsoRepository.save(utentePercorso);
-
-		return utentePercorso;
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorso - START");
+		Utente utente=getFakeUtente();
+		PercorsoFormativo percorsoFormativo=getFakePercorsoFormativo();
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorso - END");
+		return getFakeUtentePercorsoWithUtenteAndPercorso(utente, percorsoFormativo);
 	}
 	//------------------------PercorsoFormativo-------------------------
 		protected PercorsoFormativo getFakePercorsoFormativo() {

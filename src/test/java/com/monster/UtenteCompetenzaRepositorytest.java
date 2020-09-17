@@ -11,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.monster.persistence.entity.Annuncio;
 import com.monster.persistence.entity.Azienda;
+import com.monster.persistence.entity.Competenza;
+import com.monster.persistence.entity.UtenteCompetenza;
+import com.monster.persistence.entity.Utente;
 import com.monster.persistence.entity.UtenteCompetenza;
 import com.monster.repository.AziendaRepository;
 import com.monster.repository.UtenteCompetenzaRepository;
@@ -23,105 +27,91 @@ public class UtenteCompetenzaRepositorytest extends AbstractRepositoryTest{
 	private static final Logger logger = LoggerFactory.getLogger(UtenteCompetenzaRepositorytest.class);
 
 	@Autowired
-	private UtenteCompetenzaRepository utenteCompetenzaRepository;
+	private UtenteCompetenzaRepository utenteCompetenzaRT;
 
 	@BeforeEach
 	@AfterEach
-	public void initializeAziendaTest() {
-		logger.info("UtenteCompetenzaRepositorytest.initializeAziendaTest - START");		
-		utenteCompetenzaRepository.deleteAll();
-		//getFakeAzienda();
-		logger.info("UtenteCompetenzaRepositorytest.initializeAziendaTest - END");
-	}
-	@Test
-	public void testSelectById() {
-    	logger.info("UtenteCompetenzaRepositorytest.testSelectById() - START");    	
-    	UtenteCompetenza utenteCompetenza = getFakeUtenteCompetenza();
-    	System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    	System.out.println(getFakeUtenteCompetenza().toString());
-    	logger.info("UtenteCompetenzaRepositorytest.testSelectById() - Debug "+utenteCompetenza.toString());    	
-    	Assertions.assertTrue(utenteCompetenzaRepository.findById(utenteCompetenza.getId()).isPresent());	
-		logger.info("UtenteCompetenzaRepositorytest.testSelectById() - END");
+	public void initializeUtenteCompetenzaTest() {
+		logger.info("UtenteCompetenzaRepositoryTest.initializeUtenteCompetenzaTest - START");		
+		utenteCompetenzaRT.deleteAll();
+		logger.info("UtenteCompetenzaRepositoryTest.initializeUtenteCompetenzaTest - END");
 	}
 	
+	@Test
+	public void testSelectById() {
+    	logger.info("UtenteCompetenzaRepositoryTest.testSelectById() - START");    	
+    	UtenteCompetenza currentUtenteCompetenza = getFakeUtenteCompetenza();
+    	logger.info("UtenteCompetenzaRepositoryTest.testSelectById() - Debug "+getFakeUtenteCompetenza().toString());    	
+    	logger.info("UtenteCompetenzaRepositoryTest.testSelectById() - Debug "+currentUtenteCompetenza.toString());    	
+    	Assertions.assertTrue(utenteCompetenzaRT.findById(currentUtenteCompetenza.getId()).isPresent());	
+		logger.info("UtenteCompetenzaRepositoryTest.testSelectById() - END");
+	}
 	
 	@Test
     public void testSelectAllFilled(){
-    	logger.info("UtenteCompetenzaRepositorytest.testSelectAllFilled() - START");    	
-    	
+    	logger.info("UtenteCompetenzaRepositoryTest.testSelectAllFilled() - START");    	
     	getFakeUtenteCompetenza();
-//    	System.out.println(aziendaRT.count());
-    	Assertions.assertTrue(utenteCompetenzaRepository.count() == 1);
-    	logger.info("UtenteCompetenzaRepositorytest.testSelectAllFilled() - END");
+    	Assertions.assertTrue(utenteCompetenzaRT.count() == 1);
+    	logger.info("UtenteCompetenzaRepositoryTest.testSelectAllFilled() - END");
     }
-	
 	
 	@Test
     public void testSelectAllEmpty(){
-    	logger.info("UtenteCompetenzaRepositorytest.testSelectAllEmpty() - START");    	
-    	Assertions.assertTrue(utenteCompetenzaRepository.count()==0);
-		logger.info("UtenteCompetenzaRepositorytest.testSelectAllEmpty() - END");
+    	logger.info("UtenteCompetenzaRepositoryTest.testSelectAllEmpty() - START");    	
+    	Assertions.assertTrue(utenteCompetenzaRT.count()==0);
+		logger.info("UtenteCompetenzaRepositoryTest.testSelectAllEmpty() - END");
     }
+	
 	
 	@Test
 	public void testInsert() {
-    	logger.info("UtenteCompetenzaRepositorytest.testInsert() - START");    	
-    	Assertions.assertTrue(utenteCompetenzaRepository.count()==0);
+    	logger.info("UtenteCompetenzaRepositoryTest.testInsert() - START");    	
+    	Assertions.assertTrue(utenteCompetenzaRT.count()==0);
     	getFakeUtenteCompetenza();
-		Assertions.assertTrue(utenteCompetenzaRepository.count()==1);
-		logger.info("UtenteCompetenzaRepositorytest.testInsert() - END");
+		Assertions.assertTrue(utenteCompetenzaRT.count()==1);
+		logger.info("UtenteCompetenzaRepositoryTest.testInsert() - END");
 	}
 	
-	
-//	@Test
-//	public void testSelectByIdUtente() {
-//    	logger.info("UtenteCompetenzaRepositorytest.testSelectByIdUtente() - START");
-//
-//    	long id = getFakeUtenteCompetenza().getId();
-//		Assertions.assertTrue(!utenteCompetenzaRepository.findByUtente_Id(id).isEmpty());	
-//		logger.info("UtenteCompetenzaRepositorytest.testSelectByIdUtente() - END");
-//	}
-//	
-//	@Test
-//	public void testSelectByNomeCompetenza() {
-//    	logger.info("UtenteCompetenzaRepositorytest.testSelectByNomeCompetenza() - START");
-//    	getFakeUtenteCompetenza();
-//		Assertions.assertTrue(!utenteCompetenzaRepository.findByCompetenza_nome("fakeCompetenza").isEmpty());	
-//		logger.info("UtenteCompetenzaRepositorytest.testSelectByNomeCompetenza() - END");
-//	}
 	
 	@Test
-	public void testUpdate() {
-		logger.info("UtenteCompetenzaRepositorytest.testUpdate() - START");
-		UtenteCompetenza currentUtenteCompetenza = getFakeUtenteCompetenza();
-		currentUtenteCompetenza.getCompetenza().setDescrizione("descrizione diversa");
-		
-		utenteCompetenzaRepository.save(currentUtenteCompetenza);
-		Assertions.assertTrue(utenteCompetenzaRepository.findById(currentUtenteCompetenza.getId()).isPresent());	
-		Assertions.assertTrue(utenteCompetenzaRepository.findById(currentUtenteCompetenza.getId()).get().getCompetenza().getDescrizione().equals("descrizione diversa"));
-		logger.info("UtenteCompetenzaRepositorytest.testUpdate() - END");
+	public void testSelectByCompetenza() {
+    	logger.info("UtenteCompetenzaRepositoryTest.testSelectByCompetenza() - START");
+    	Competenza competenza = getFakeCompetenza();
+    	getFakeUtenteCompetenzaWithCompetenza(competenza);
+		Assertions.assertTrue(utenteCompetenzaRT.findByCompetenza(competenza).get(0).getCompetenza().getId()==competenza.getId());	
+		logger.info("UtenteCompetenzaRepositoryTest.testSelectByCompetenza() - END");
 	}
+	
+	@Test
+	public void testSelectByUtente() {
+    	logger.info("UtenteCompetenzaRepositoryTest.testSelectByUtente() - START");
+    	Utente utente = getFakeUtente();
+    	getFakeUtenteCompetenzaWithUtente(utente);
+		Assertions.assertTrue(utenteCompetenzaRT.findByUtente(utente).get(0).getUtente().getId()==utente.getId());	
+		logger.info("UtenteCompetenzaRepositoryTest.testSelectByUtente() - END");
+	}
+	
 	
 	@Test
 	public void testDeleteById() {
-    	logger.info("UtenteCompetenzaRepositorytest.testDeleteById() - START");    	
-		UtenteCompetenza currentUtenteCompetenza = getFakeUtenteCompetenza();
-    	Assertions.assertTrue(utenteCompetenzaRepository.count()==1);
-    	utenteCompetenzaRepository.deleteById(currentUtenteCompetenza.getId());
-    	Assertions.assertTrue(utenteCompetenzaRepository.count()==0);
-    	logger.info("UtenteCompetenzaRepositorytest.testDeleteById() - END");
+    	logger.info("UtenteCompetenzaRepositoryTest.testDeleteById() - START");    	
+    	UtenteCompetenza currentUtenteCompetenza = getFakeUtenteCompetenza();
+    	Assertions.assertTrue(utenteCompetenzaRT.count()==1);
+    	utenteCompetenzaRT.deleteById(currentUtenteCompetenza.getId());
+    	Assertions.assertTrue(utenteCompetenzaRT.count()==0);
+    	logger.info("UtenteCompetenzaRepositoryTest.testDeleteById() - END");
 	}
 	
 	@Test
 	public void testDeleteAll () {
-    	logger.info("UtenteCompetenzaRepositorytest.testDeleteAll() - START");    	
+    	logger.info("UtenteCompetenzaRepositoryTest.testDeleteAll() - START");    	
     	getFakeUtenteCompetenza();
-    	Assertions.assertTrue(utenteCompetenzaRepository.count()==1);
+    	Assertions.assertTrue(utenteCompetenzaRT.count()==1);
     	getFakeUtenteCompetenza();
-    	Assertions.assertTrue(utenteCompetenzaRepository.count()==2);
-    	utenteCompetenzaRepository.deleteAll();
-		Assertions.assertTrue(utenteCompetenzaRepository.count()==0);
-		logger.info("UtenteCompetenzaRepositorytest.testDeleteAll() - END");
+    	Assertions.assertTrue(utenteCompetenzaRT.count()==2);
+    	utenteCompetenzaRT.deleteAll();
+		Assertions.assertTrue(utenteCompetenzaRT.count()==0);
+		logger.info("UtenteCompetenzaRepositoryTest.testDeleteAll() - END");
 	}
 	
 }

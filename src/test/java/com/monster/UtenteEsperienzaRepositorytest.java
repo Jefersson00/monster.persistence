@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.monster.persistence.entity.UtenteCompetenza;
+import com.monster.persistence.entity.Esperienza;
+import com.monster.persistence.entity.Utente;
 import com.monster.persistence.entity.UtenteEsperienza;
-import com.monster.repository.UtenteCompetenzaRepository;
 import com.monster.repository.UtenteEsperienzaRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -22,96 +22,91 @@ public class UtenteEsperienzaRepositorytest extends AbstractRepositoryTest{
 	private static final Logger logger = LoggerFactory.getLogger(UtenteEsperienzaRepositorytest.class);
 
 	@Autowired
-	private UtenteEsperienzaRepository utenteEsperienzaRepository;
+	private UtenteEsperienzaRepository utenteEsperienzaRT;
 
 	@BeforeEach
 	@AfterEach
-	public void initializeAziendaTest() {
-		logger.info("UtenteEsperienzaRepositorytest.initializeAziendaTest - START");		
-		utenteEsperienzaRepository.deleteAll();
-		//getFakeAzienda();
-		logger.info("UtenteEsperienzaRepositorytest.initializeAziendaTest - END");
-	}
-	@Test
-	public void testSelectById() {
-    	logger.info("UtenteEsperienzaRepositorytest.testSelectById() - START");    	
-    	UtenteEsperienza utenteEsperienza = getFakeUtenteEsperienza();
-    	System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    	System.out.println(getFakeUtenteEsperienza().toString());
-    	logger.info("UtenteEsperienzaRepositorytest.testSelectById() - Debug "+utenteEsperienza.toString());    	
-    	Assertions.assertTrue(utenteEsperienzaRepository.findById(utenteEsperienza.getId()).isPresent());	
-		logger.info("UtenteEsperienzaRepositorytest.testSelectById() - END");
+	public void initializeUtenteEsperienzaTest() {
+		logger.info("UtenteEsperienzaRepositoryTest.initializeUtenteEsperienzaTest - START");		
+		utenteEsperienzaRT.deleteAll();
+		logger.info("UtenteEsperienzaRepositoryTest.initializeUtenteEsperienzaTest - END");
 	}
 	
+	@Test
+	public void testSelectById() {
+    	logger.info("UtenteEsperienzaRepositoryTest.testSelectById() - START");    	
+    	UtenteEsperienza currentUtenteEsperienza = getFakeUtenteEsperienza();
+    	logger.info("UtenteEsperienzaRepositoryTest.testSelectById() - Debug "+getFakeUtenteEsperienza().toString());    	
+    	logger.info("UtenteEsperienzaRepositoryTest.testSelectById() - Debug "+currentUtenteEsperienza.toString());    	
+    	Assertions.assertTrue(utenteEsperienzaRT.findById(currentUtenteEsperienza.getId()).isPresent());	
+		logger.info("UtenteEsperienzaRepositoryTest.testSelectById() - END");
+	}
 	
 	@Test
     public void testSelectAllFilled(){
-    	logger.info("UtenteEsperienzaRepositorytest.testSelectAllFilled() - START");    	
-    	
-    	getFakeUtenteEsperienza();//    	System.out.println(aziendaRT.count());
-    	Assertions.assertTrue(utenteEsperienzaRepository.count() == 1);
-    	logger.info("UtenteEsperienzaRepositorytest.testSelectAllFilled() - END");
+    	logger.info("UtenteEsperienzaRepositoryTest.testSelectAllFilled() - START");    	
+    	getFakeUtenteEsperienza();
+    	Assertions.assertTrue(utenteEsperienzaRT.count() == 1);
+    	logger.info("UtenteEsperienzaRepositoryTest.testSelectAllFilled() - END");
     }
-	
 	
 	@Test
     public void testSelectAllEmpty(){
-    	logger.info("UtenteEsperienzaRepositorytest.testSelectAllEmpty() - START");    	
-    	Assertions.assertTrue(utenteEsperienzaRepository.count()==0);
-		logger.info("UtenteEsperienzaRepositorytest.testSelectAllEmpty() - END");
+    	logger.info("UtenteEsperienzaRepositoryTest.testSelectAllEmpty() - START");    	
+    	Assertions.assertTrue(utenteEsperienzaRT.count()==0);
+		logger.info("UtenteEsperienzaRepositoryTest.testSelectAllEmpty() - END");
     }
+	
 	
 	@Test
 	public void testInsert() {
-    	logger.info("UtenteEsperienzaRepositorytest.testInsert() - START");    	
-    	Assertions.assertTrue(utenteEsperienzaRepository.count()==0);
+    	logger.info("UtenteEsperienzaRepositoryTest.testInsert() - START");    	
+    	Assertions.assertTrue(utenteEsperienzaRT.count()==0);
     	getFakeUtenteEsperienza();
-		Assertions.assertTrue(utenteEsperienzaRepository.count()==1);
-		logger.info("UtenteEsperienzaRepositorytest.testInsert() - END");
+		Assertions.assertTrue(utenteEsperienzaRT.count()==1);
+		logger.info("UtenteEsperienzaRepositoryTest.testInsert() - END");
 	}
-	
 	
 	
 	@Test
-	public void testSelectByNomeEsperienza() {
-    	logger.info("UtenteCompetenzaRepositorytest.testSelectByNomeCompetenza() - START");
-    	getFakeUtenteEsperienza();
-//		Assertions.assertTrue(!utenteEsperienzaRepository.findByEsperienza_NomeAzienda("fakeAzienda").isEmpty());	
-		logger.info("UtenteCompetenzaRepositorytest.testSelectByNomeCompetenza() - END");
+	public void testSelectByEsperienza() {
+    	logger.info("UtenteEsperienzaRepositoryTest.testSelectByEsperienza() - START");
+    	Esperienza esperienza = getFakeEsperienza();
+    	getFakeUtenteEsperienzaWithEsperienza(esperienza);
+		Assertions.assertTrue(utenteEsperienzaRT.findByEsperienza(esperienza).get(0).getEsperienza().getId()==esperienza.getId());	
+		logger.info("UtenteEsperienzaRepositoryTest.testSelectByEsperienza() - END");
 	}
 	
 	@Test
-	public void testUpdate() {
-		logger.info("UtenteEsperienzaRepositorytest.testUpdate() - START");
-		UtenteEsperienza currentUtenteEsperienza = getFakeUtenteEsperienza();
-		currentUtenteEsperienza.getEsperienza().setDescrizione("descrizione diversa");
-		
-		utenteEsperienzaRepository.save(currentUtenteEsperienza);
-		Assertions.assertTrue(utenteEsperienzaRepository.findById(currentUtenteEsperienza.getId()).isPresent());	
-		Assertions.assertTrue(utenteEsperienzaRepository.findById(currentUtenteEsperienza.getId()).get().getEsperienza().getDescrizione().equals("descrizione diversa"));
-		logger.info("UtenteEsperienzaRepositorytest.testUpdate() - END");
+	public void testSelectByUtente() {
+    	logger.info("UtenteEsperienzaRepositoryTest.testSelectByUtente() - START");
+    	Utente utente = getFakeUtente();
+    	getFakeUtenteEsperienzaWithUtente(utente);
+		Assertions.assertTrue(utenteEsperienzaRT.findByUtente(utente).get(0).getUtente().getId()==utente.getId());	
+		logger.info("UtenteEsperienzaRepositoryTest.testSelectByUtente() - END");
 	}
+	
 	
 	@Test
 	public void testDeleteById() {
-    	logger.info("UtenteEsperienzaRepositorytest.testDeleteById() - START");    	
-		UtenteEsperienza currentUtenteEsperienza = getFakeUtenteEsperienza();
-    	Assertions.assertTrue(utenteEsperienzaRepository.count()==1);
-    	utenteEsperienzaRepository.deleteById(currentUtenteEsperienza.getId());
-    	Assertions.assertTrue(utenteEsperienzaRepository.count()==0);
-    	logger.info("UtenteEsperienzaRepositorytest.testDeleteById() - END");
+    	logger.info("UtenteEsperienzaRepositoryTest.testDeleteById() - START");    	
+    	UtenteEsperienza currentUtenteEsperienza = getFakeUtenteEsperienza();
+    	Assertions.assertTrue(utenteEsperienzaRT.count()==1);
+    	utenteEsperienzaRT.deleteById(currentUtenteEsperienza.getId());
+    	Assertions.assertTrue(utenteEsperienzaRT.count()==0);
+    	logger.info("UtenteEsperienzaRepositoryTest.testDeleteById() - END");
 	}
 	
 	@Test
 	public void testDeleteAll () {
-    	logger.info("UtenteEsperienzaRepositorytest.testDeleteAll() - START");    	
+    	logger.info("UtenteEsperienzaRepositoryTest.testDeleteAll() - START");    	
     	getFakeUtenteEsperienza();
-    	Assertions.assertTrue(utenteEsperienzaRepository.count()==1);
+    	Assertions.assertTrue(utenteEsperienzaRT.count()==1);
     	getFakeUtenteEsperienza();
-    	Assertions.assertTrue(utenteEsperienzaRepository.count()==2);
-    	utenteEsperienzaRepository.deleteAll();
-		Assertions.assertTrue(utenteEsperienzaRepository.count()==0);
-		logger.info("UtenteEsperienzaRepositorytest.testDeleteAll() - END");
+    	Assertions.assertTrue(utenteEsperienzaRT.count()==2);
+    	utenteEsperienzaRT.deleteAll();
+		Assertions.assertTrue(utenteEsperienzaRT.count()==0);
+		logger.info("UtenteEsperienzaRepositoryTest.testDeleteAll() - END");
 	}
 
 }

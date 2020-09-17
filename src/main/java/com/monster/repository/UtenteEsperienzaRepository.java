@@ -12,6 +12,6 @@ import com.monster.persistence.entity.UtenteEsperienza;
 public interface UtenteEsperienzaRepository extends JpaRepository<UtenteEsperienza, Long> {
 	
 	List<UtenteEsperienza> findByUtente(Utente utente); 
-	List<UtenteEsperienza> findByUtenteId(Esperienza esperienza);
+	List<UtenteEsperienza> findByEsperienza(Esperienza esperienza);
 
 }
