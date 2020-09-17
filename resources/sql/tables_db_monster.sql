@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `utente` (
 -- Dump della struttura di tabella monster.utente_competenza
 DROP TABLE IF EXISTS `utente_competenza`;
 CREATE TABLE IF NOT EXISTS `utente_competenza` (
-  `id` bigint(11) NOT NULL,
+  `id` bigint(11) NOT NULL AUTO_INCREMENT,
   `id_utente` bigint(11) NOT NULL,
   `id_competenza` bigint(11) NOT NULL,
   PRIMARY KEY (`id`),
