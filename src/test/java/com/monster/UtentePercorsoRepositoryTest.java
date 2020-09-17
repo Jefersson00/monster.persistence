@@ -15,7 +15,9 @@ import com.monster.persistence.entity.PercorsoFormativo;
 import com.monster.persistence.entity.Utente;
 import com.monster.persistence.entity.UtentePercorso;
 import com.monster.persistence.entity.UtentePercorso;
+import com.monster.repository.PercorsoFormativoRepository;
 import com.monster.repository.UtentePercorsoRepository;
+import com.monster.repository.UtenteRepository;
 import com.monster.repository.UtentePercorsoRepository;
 
 @ExtendWith(SpringExtension.class)
@@ -25,12 +27,20 @@ public class UtentePercorsoRepositoryTest extends AbstractRepositoryTest{
 
 	@Autowired
 	private UtentePercorsoRepository utentePercorsoRT;
+	
+	@Autowired
+	private UtenteRepository utenteRT;
+	
+	@Autowired
+	private PercorsoFormativoRepository percorsoFormativoRT;
 
 	@BeforeEach
 	@AfterEach
 	public void initializeUtentePercorsoTest() {
 		logger.info("UtentePercorsoRepositoryTest.initializeUtentePercorsoTest - START");		
 		utentePercorsoRT.deleteAll();
+		utenteRT.deleteAll();
+		percorsoFormativoRT.deleteAll();
 		logger.info("UtentePercorsoRepositoryTest.initializeUtentePercorsoTest - END");
 	}
 	

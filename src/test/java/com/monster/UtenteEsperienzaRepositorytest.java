@@ -14,7 +14,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.monster.persistence.entity.Esperienza;
 import com.monster.persistence.entity.Utente;
 import com.monster.persistence.entity.UtenteEsperienza;
+import com.monster.repository.EsperienzaRepository;
 import com.monster.repository.UtenteEsperienzaRepository;
+import com.monster.repository.UtenteRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -23,12 +25,21 @@ public class UtenteEsperienzaRepositorytest extends AbstractRepositoryTest{
 
 	@Autowired
 	private UtenteEsperienzaRepository utenteEsperienzaRT;
+	
+	@Autowired
+	private EsperienzaRepository esperienzaRT;
+	
+	@Autowired
+	private UtenteRepository utenteRT;
 
 	@BeforeEach
 	@AfterEach
 	public void initializeUtenteEsperienzaTest() {
 		logger.info("UtenteEsperienzaRepositoryTest.initializeUtenteEsperienzaTest - START");		
+		
 		utenteEsperienzaRT.deleteAll();
+		utenteRT.deleteAll();
+		esperienzaRT.deleteAll();
 		logger.info("UtenteEsperienzaRepositoryTest.initializeUtenteEsperienzaTest - END");
 	}
 	

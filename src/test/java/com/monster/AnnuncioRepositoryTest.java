@@ -15,6 +15,8 @@ import com.monster.persistence.entity.Annuncio;
 import com.monster.persistence.entity.Azienda;
 import com.monster.repository.AnnuncioRepository;
 import com.monster.repository.AziendaRepository;
+import com.monster.repository.SedeRepository;
+import com.monster.repository.SettoreRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -24,13 +26,20 @@ public class AnnuncioRepositoryTest extends AbstractRepositoryTest {
 
 	@Autowired
 	private AnnuncioRepository annuncioRT;
+	
+	@Autowired
+	private SettoreRepository settoreRT;
+	
+	@Autowired
+	private SedeRepository sedeRT;
 
 	@BeforeEach
 	@AfterEach
 	public void initializeAziendaTest() {
 		logger.info("AziendaRepositoryTest.initializeAziendaTest - START");		
 		annuncioRT.deleteAll();
-//		getFakeAnnuncio();
+		sedeRT.deleteAll();
+		settoreRT.deleteAll();
 		logger.info("AziendaRepositoryTest.initializeAziendaTest - END");
 	}
 	

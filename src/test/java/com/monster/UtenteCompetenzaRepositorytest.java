@@ -18,7 +18,9 @@ import com.monster.persistence.entity.UtenteCompetenza;
 import com.monster.persistence.entity.Utente;
 import com.monster.persistence.entity.UtenteCompetenza;
 import com.monster.repository.AziendaRepository;
+import com.monster.repository.CompetenzaRepository;
 import com.monster.repository.UtenteCompetenzaRepository;
+import com.monster.repository.UtenteRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -28,12 +30,22 @@ public class UtenteCompetenzaRepositorytest extends AbstractRepositoryTest{
 
 	@Autowired
 	private UtenteCompetenzaRepository utenteCompetenzaRT;
+	
+	@Autowired
+	private UtenteRepository utenteRT;
+	
+	@Autowired
+	private CompetenzaRepository competenzaRT;
 
 	@BeforeEach
 	@AfterEach
 	public void initializeUtenteCompetenzaTest() {
 		logger.info("UtenteCompetenzaRepositoryTest.initializeUtenteCompetenzaTest - START");		
 		utenteCompetenzaRT.deleteAll();
+		competenzaRT.deleteAll();
+		utenteRT.deleteAll();
+		
+		
 		logger.info("UtenteCompetenzaRepositoryTest.initializeUtenteCompetenzaTest - END");
 	}
 	

@@ -16,7 +16,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.monster.persistence.entity.Annuncio;
 import com.monster.persistence.entity.Candidatura;
 import com.monster.persistence.entity.Utente;
+import com.monster.repository.AnnuncioRepository;
 import com.monster.repository.CandidaturaRepository;
+import com.monster.repository.UtenteRepository;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -27,11 +29,19 @@ public class CandidaturaRepositoryTest extends AbstractRepositoryTest {
 	@Autowired
 	private CandidaturaRepository candidaturaRT;
 	
+	@Autowired
+	private AnnuncioRepository annuncioRT;
+	
+	@Autowired
+	private UtenteRepository utenteRT;
+	
 	@BeforeEach
 	@AfterEach
 	public void initializeCandidaturaTest() {
 		logger.info("CandidaturaRepositoryTest.initializeCandidaturaTest - START");		
 		candidaturaRT.deleteAll();
+		annuncioRT.deleteAll();
+		utenteRT.deleteAll();
 		logger.info("CandidaturaRepositoryTest.initializeCandidaturaTest - END");
 	}
 	

@@ -38,7 +38,7 @@ class SedeRepositoryTest extends AbstractRepositoryTest{
 	@AfterEach
 	public void initializeSedeTest() {
 		logger.info("SedeRepositoryTest.initializeSedeTest - START");
-//		sedeRT.deleteAll();
+		sedeRT.deleteAll();
 		aziendaRT.deleteAll();
 		logger.info("SedeRepositoryTest.initializeSedeTest - END");
 	}
