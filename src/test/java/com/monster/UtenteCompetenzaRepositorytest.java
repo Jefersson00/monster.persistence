@@ -73,22 +73,22 @@ public class UtenteCompetenzaRepositorytest extends AbstractRepositoryTest{
 	}
 	
 	
-	@Test
-	public void testSelectByIdUtente() {
-    	logger.info("UtenteCompetenzaRepositorytest.testSelectByIdUtente() - START");
-
-    	long id = getFakeUtenteCompetenza().getId();
-		Assertions.assertTrue(!utenteCompetenzaRepository.findByUtente_Id(id).isEmpty());	
-		logger.info("UtenteCompetenzaRepositorytest.testSelectByIdUtente() - END");
-	}
-	
-	@Test
-	public void testSelectByNomeCompetenza() {
-    	logger.info("UtenteCompetenzaRepositorytest.testSelectByNomeCompetenza() - START");
-    	getFakeUtenteCompetenza();
-		Assertions.assertTrue(!utenteCompetenzaRepository.findByCompetenza_nome("fakeCompetenza").isEmpty());	
-		logger.info("UtenteCompetenzaRepositorytest.testSelectByNomeCompetenza() - END");
-	}
+//	@Test
+//	public void testSelectByIdUtente() {
+//    	logger.info("UtenteCompetenzaRepositorytest.testSelectByIdUtente() - START");
+//
+//    	long id = getFakeUtenteCompetenza().getId();
+//		Assertions.assertTrue(!utenteCompetenzaRepository.findByUtente_Id(id).isEmpty());	
+//		logger.info("UtenteCompetenzaRepositorytest.testSelectByIdUtente() - END");
+//	}
+//	
+//	@Test
+//	public void testSelectByNomeCompetenza() {
+//    	logger.info("UtenteCompetenzaRepositorytest.testSelectByNomeCompetenza() - START");
+//    	getFakeUtenteCompetenza();
+//		Assertions.assertTrue(!utenteCompetenzaRepository.findByCompetenza_nome("fakeCompetenza").isEmpty());	
+//		logger.info("UtenteCompetenzaRepositorytest.testSelectByNomeCompetenza() - END");
+//	}
 	
 	@Test
 	public void testUpdate() {

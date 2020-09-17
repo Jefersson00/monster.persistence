@@ -12,14 +12,7 @@ import com.monster.persistence.entity.UtenteCompetenza;
 public interface UtenteCompetenzaRepository extends JpaRepository<UtenteCompetenza, Long> {
 
 	
-	List<UtenteCompetenza> findByCompetenza_Id(long id);
-	
-	List<UtenteCompetenza> findByCompetenza_nome(String nome);
-	
-	List<UtenteCompetenza> findByUtente_Id(long id);
-	
-//	List<Utente> findByCompetenza_Id(long id);
-//	
-//	List<Utente> findByUtente_Id(long id);
+	List<UtenteCompetenza> findByCompetenza(Competenza competenza);
+	List<UtenteCompetenza> findByUtente(Utente utente);
 	
 }

@@ -173,6 +173,34 @@ public abstract class AbstractRepositoryTest {
 		logger.info("AbstractRepositoryTest.getFakeSede - END");
 		return testSede;
 	}
+	
+	protected Sede getFakeSedeWithCitta(String citta) {
+		logger.info("AbstractRepositoryTest.getFakeSede - START");
+
+		Sede testSede = new Sede();
+		int random = (int) (Math.random() * 10000);
+		testSede.setCitta(citta + random);
+		testSede.setRegione("Regione" + random);
+		testSede.setAzienda(getFakeAzienda());
+		sedeRepository.save(testSede);
+//		logger.error("AbstractRepositoryTest.getFakeSede - Debug:"+testSede.getId());    	
+		logger.info("AbstractRepositoryTest.getFakeSede - END");
+		return testSede;
+	}
+	
+	protected Sede getFakeSedeWithRegione(String regione) {
+		logger.info("AbstractRepositoryTest.getFakeSede - START");
+
+		Sede testSede = new Sede();
+		int random = (int) (Math.random() * 10000);
+		testSede.setCitta("citta" + random);
+		testSede.setRegione(regione + random);
+		testSede.setAzienda(getFakeAzienda());
+		sedeRepository.save(testSede);
+//		logger.error("AbstractRepositoryTest.getFakeSede - Debug:"+testSede.getId());    	
+		logger.info("AbstractRepositoryTest.getFakeSede - END");
+		return testSede;
+	}
 
 //--------------Settore-----------
 
