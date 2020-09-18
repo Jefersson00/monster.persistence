@@ -36,8 +36,6 @@ public class AziendaRepositoryTest extends AbstractRepositoryTest {
 	public void testSelectById() {
     	logger.info("AziendaRepositoryTest.testSelectById() - START");    	
     	Azienda currentAzienda = getFakeAzienda();
-    	System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    	System.out.println(getFakeAzienda().toString());
     	logger.info("AziendaRepositoryTest.testSelectById() - Debug "+currentAzienda.toString());    	
     	Assertions.assertTrue(aziendaRT.findById(currentAzienda.getId()).isPresent());	
 		logger.info("AziendaRepositoryTest.testSelectById() - END");

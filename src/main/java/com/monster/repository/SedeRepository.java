@@ -10,8 +10,6 @@ import com.monster.persistence.entity.Sede;
 @Repository
 public interface SedeRepository extends JpaRepository<Sede, Long>{
 	
-	
-	
 	List<Sede> findByCitta(String Citta);
 	List<Sede> findByRegione(String Regione);
 	

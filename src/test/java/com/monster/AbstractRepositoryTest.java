@@ -181,7 +181,7 @@ public abstract class AbstractRepositoryTest {
 	}
 	
 	protected Sede getFakeSedeWithCitta(String citta) {
-		logger.info("AbstractRepositoryTest.getFakeSede - START");
+		logger.info("AbstractRepositoryTest.getFakeSedeWithCitta - START");
 
 		Sede testSede = new Sede();
 		int random = (int) (Math.random() * 10000);
@@ -190,12 +190,12 @@ public abstract class AbstractRepositoryTest {
 		testSede.setAzienda(getFakeAzienda());
 		sedeRepository.save(testSede);
 //		logger.error("AbstractRepositoryTest.getFakeSede - Debug:"+testSede.getId());    	
-		logger.info("AbstractRepositoryTest.getFakeSede - END");
+		logger.info("AbstractRepositoryTest.getFakeSedeWithCitta - END");
 		return testSede;
 	}
 	
 	protected Sede getFakeSedeWithRegione(String regione) {
-		logger.info("AbstractRepositoryTest.getFakeSede - START");
+		logger.info("AbstractRepositoryTest.getFakeSedeWithRegione - START");
 
 		Sede testSede = new Sede();
 		int random = (int) (Math.random() * 10000);
@@ -204,7 +204,7 @@ public abstract class AbstractRepositoryTest {
 		testSede.setAzienda(getFakeAzienda());
 		sedeRepository.save(testSede);
 //		logger.error("AbstractRepositoryTest.getFakeSede - Debug:"+testSede.getId());    	
-		logger.info("AbstractRepositoryTest.getFakeSede - END");
+		logger.info("AbstractRepositoryTest.getFakeSedeWithRegione - END");
 		return testSede;
 	}
 
@@ -375,6 +375,8 @@ public abstract class AbstractRepositoryTest {
 		UtenteEsperienza testUtenteEsperienza=new UtenteEsperienza();
 		testUtenteEsperienza.setEsperienza(esperienza);
 		testUtenteEsperienza.setUtente(utente);
+		Date d= new Date();
+		testUtenteEsperienza.setDataInizio(d);
 		utenteEsperienzaRepository.save(testUtenteEsperienza);
 		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithUtenteAndEsperienza - Debug:" + testUtenteEsperienza.toString());
 		logger.debug("AbstractRepositoryTest.getFakeUtenteEsperienzaWithUtenteAndEsperienza - Debug:" + testUtenteEsperienza.getId() + "--");
@@ -383,9 +385,9 @@ public abstract class AbstractRepositoryTest {
 	}
 	
 	protected UtenteEsperienza getFakeUtenteEsperienzaWithEsperienza(Esperienza esperienza) {
-		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithAnnuncio - START");
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithEsperienza - START");
 		Utente utente= getFakeUtente();
-		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithAnnuncio - END");
+		logger.info("AbstractRepositoryTest.getFakeUtenteEsperienzaWithEsperienza - END");
 		return getFakeUtenteEsperienzaWithUtenteAndEsperienza(utente, esperienza);	
 	}
 	
@@ -418,9 +420,9 @@ public abstract class AbstractRepositoryTest {
 	}
 	
 	protected UtentePercorso getFakeUtentePercorsoWithPercorso(PercorsoFormativo percorsoFormativo) {
-		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithAnnuncio - START");
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithPercorso - START");
 		Utente utente= getFakeUtente();
-		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithAnnuncio - END");
+		logger.info("AbstractRepositoryTest.getFakeUtentePercorsoWithPercorso - END");
 		return getFakeUtentePercorsoWithUtenteAndPercorso(utente, percorsoFormativo);	
 	}
 	

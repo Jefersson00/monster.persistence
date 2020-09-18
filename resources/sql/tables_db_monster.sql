@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `utente_esperienza` (
   `id_utente` bigint(11) NOT NULL,
   `id_esperienza` bigint(11) NOT NULL,
   `data_inizio` date NOT NULL,
-  `data_fine` date NOT NULL,
+  `data_fine` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_utente_esperienza` (`id_utente`),
   KEY `id_esperienza` (`id_esperienza`),

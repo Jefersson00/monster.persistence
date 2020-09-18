@@ -6,7 +6,7 @@
 
 	<groupId>proxima.project</groupId>
 	<artifactId>monster.persistence</artifactId>
-	<version>0.0.2</version>
+	<version>0.1.0</version>
 	<packaging>jar</packaging>
 	<name>monster.persistence</name>
 	<description>persistence  Monster project  for Spring Boot </description>

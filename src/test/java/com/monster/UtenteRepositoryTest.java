@@ -36,10 +36,7 @@ public class UtenteRepositoryTest extends AbstractRepositoryTest {
 	@Test
 	public void testSelectByEmail() {
 		logger.info("UtenteRepositoryTest.testSelectByName() - START");
-
 		Utente currentUtente = getFakeUtente();
-//		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-//		System.out.println(currentUtente.toString());
 		logger.info("UtenteRepositoryTest.testSelectByName() - Debug " + currentUtente.toString());
 		Assertions.assertTrue(utenteRT.findById(currentUtente.getId()).isPresent());
 		logger.info("UtenteRepositoryTest.testSelectByName() - END");

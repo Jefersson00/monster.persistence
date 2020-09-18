@@ -47,8 +47,6 @@ class SedeRepositoryTest extends AbstractRepositoryTest{
 	public void testSelectWithCitta() {
     	logger.info("SedeRepositoryTest.testSelectByCitta() - START");    	
     	Sede currentSede= getFakeSedeWithCitta("milano");
-    	System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    	System.out.println(currentSede.toString());
     	logger.info("SedeRepositoryTest.testSelectByCitta() - Debug "+currentSede.toString());    	
     	Assertions.assertTrue(sedeRT.findByCitta(currentSede.getCitta()).get(0).getCitta().equals(currentSede.getCitta()));	
 		logger.info("SedeRepositoryTest.testSelectByCitta() - END");
@@ -58,8 +56,6 @@ class SedeRepositoryTest extends AbstractRepositoryTest{
 	public void testSelectWithRegione() {
     	logger.info("SedeRepositoryTest.testSelectByRegione - START");    	
     	Sede currentSede= getFakeSedeWithRegione("sicilia");
-    	System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-    	System.out.println(currentSede.toString());
     	logger.info("SedeRepositoryTest.testSelectByRegione() - Debug "+currentSede.toString());    	
     	Assertions.assertTrue(sedeRT.findByRegione(currentSede.getRegione()).get(0).getRegione().equals(currentSede.getRegione()));	
 		logger.info("SedeRepositoryTest.testSelectByRegione - END");

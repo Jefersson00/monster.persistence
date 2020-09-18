@@ -13,12 +13,6 @@ import com.monster.persistence.entity.Utente;
 public interface EsperienzaRepository extends JpaRepository<Esperienza, Long>{
 
 	
-	/*
-	 * la query precedente era fatta male perche sulla tabella esperienza
-	 * possono esistere n record con l identico campo nomeAzienda, di
-	 * conseguenza quello che riceviamo dalla query e una lista di esperienza
-	 */
-	
 	List<Esperienza> findByNomeAzienda(String nomeAzienda);
 
 }
