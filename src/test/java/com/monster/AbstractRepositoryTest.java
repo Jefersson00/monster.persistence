@@ -38,10 +38,13 @@ public abstract class AbstractRepositoryTest {
 
 	@Autowired
 	private UtenteRepository utenteRepository;
-
+	
 	@Autowired
 	private AziendaRepository aziendaRepository;
-
+	
+//	@Autowired
+//	private Azienda testAzienda ;
+//	
 	@Autowired
 	private SedeRepository sedeRepository;
 
@@ -97,7 +100,7 @@ public abstract class AbstractRepositoryTest {
 		logger.info("AbstractRepositoryTest.getFakeUtenteWithEmailAndPhone - START");
 
 		Utente testUtente = new Utente();
-
+		
 		testUtente.setEmail(email);
 		testUtente.setTelefono(numeroTelefono);
 		testUtente.setNome("nomeProva");
@@ -146,6 +149,7 @@ public abstract class AbstractRepositoryTest {
 
 		Azienda testAzienda = new Azienda();
 		int random = (int) (Math.random() * 10000);
+		
 		testAzienda.setEmail(email);
 		testAzienda.setPassword("pswTest");
 		testAzienda.setNome(name);

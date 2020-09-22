@@ -2,6 +2,14 @@ package com.monster.persistence.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.Date;
 
 
@@ -10,6 +18,12 @@ import java.util.Date;
  * 
  */
 @Entity
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter 
 @Table(name="utente_esperienza")
 @NamedQuery(name="UtenteEsperienza.findAll", query="SELECT u FROM UtenteEsperienza u")
 public class UtenteEsperienza implements Serializable {
@@ -36,54 +50,5 @@ public class UtenteEsperienza implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_utente")
 	private Utente utente;
-
-	public UtenteEsperienza() {
-	}
-
-	public long getId() {
-		return this.id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Date getDataFine() {
-		return this.dataFine;
-	}
-
-	public void setDataFine(Date dataFine) {
-		this.dataFine = dataFine;
-	}
-
-	public Date getDataInizio() {
-		return this.dataInizio;
-	}
-
-	public void setDataInizio(Date dataInizio) {
-		this.dataInizio = dataInizio;
-	}
-
-	public Esperienza getEsperienza() {
-		return this.esperienza;
-	}
-
-	public void setEsperienza(Esperienza esperienza) {
-		this.esperienza = esperienza;
-	}
-
-	public Utente getUtente() {
-		return this.utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-
-	@Override
-	public String toString() {
-		return "UtenteEsperienza [id=" + id + ", dataFine=" + dataFine + ", dataInizio=" + dataInizio + ", esperienza="
-				+ esperienza + ", utente=" + utente + "]";
-	}
 
 }

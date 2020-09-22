@@ -3,12 +3,25 @@ package com.monster.persistence.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 
 /**
  * The persistent class for the utente_percorso database table.
  * 
  */
 @Entity
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter 
 @Table(name="utente_percorso")
 @NamedQuery(name="UtentePercorso.findAll", query="SELECT u FROM UtentePercorso u")
 public class UtentePercorso implements Serializable {
@@ -27,37 +40,5 @@ public class UtentePercorso implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="id_utente")
 	private Utente utente;
-
-	public UtentePercorso() {
-	}
-
-	public long getId() {
-		return this.id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public PercorsoFormativo getPercorsoFormativo() {
-		return this.percorsoFormativo;
-	}
-
-	public void setPercorsoFormativo(PercorsoFormativo percorsoFormativo) {
-		this.percorsoFormativo = percorsoFormativo;
-	}
-
-	public Utente getUtente() {
-		return this.utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-
-	@Override
-	public String toString() {
-		return "UtentePercorso [id=" + id + ", percorsoFormativo=" + percorsoFormativo + ", utente=" + utente + "]";
-	}
 
 }

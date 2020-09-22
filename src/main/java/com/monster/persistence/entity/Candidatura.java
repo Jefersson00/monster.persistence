@@ -3,12 +3,25 @@ package com.monster.persistence.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 
 /**
  * The persistent class for the candidatura database table.
  * 
  */
 @Entity
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter 
 @Table(name="candidatura")
 @NamedQuery(name="Candidatura.findAll", query="SELECT c FROM Candidatura c")
 public class Candidatura implements Serializable {
@@ -28,36 +41,6 @@ public class Candidatura implements Serializable {
 	@JoinColumn(name="id_utente")
 	private Utente utente;
 
-	public Candidatura() {
-	}
 
-	public long getId() {
-		return this.id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public Annuncio getAnnuncio() {
-		return this.annuncio;
-	}
-
-	public void setAnnuncio(Annuncio annuncio) {
-		this.annuncio = annuncio;
-	}
-
-	public Utente getUtente() {
-		return this.utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-
-	@Override
-	public String toString() {
-		return "Candidatura [id=" + id + ", annuncio=" + annuncio.getSede() + ", utente=" + utente.getNome() + "]";
-	}
 
 }
