@@ -26,6 +26,7 @@ public class UtenteRepositoryTest extends AbstractRepositoryTest {
 	@Autowired
 	UtenteRepository utenteRT;
 
+	
 	@BeforeEach
 	@AfterEach
 	public void initializeUtenteTest() {
