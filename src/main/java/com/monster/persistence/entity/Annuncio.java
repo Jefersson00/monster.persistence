@@ -56,7 +56,4 @@ public class Annuncio {
 	//bi-directional many-to-one association to Candidatura
 	@OneToMany(mappedBy="annuncio")
 	private List<Candidatura> candidaturas;
-
-	
-
 }

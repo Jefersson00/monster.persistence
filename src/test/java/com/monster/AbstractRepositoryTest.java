@@ -281,6 +281,27 @@ public abstract class AbstractRepositoryTest {
 
 	}
 	
+	
+	protected Annuncio getFakeAnnuncioWithDescrizione(String descrizione) {
+		logger.info("AbstractRepositoryTest.getFakeAnnuncioWithDescrizione - START");
+
+		Annuncio testAnnuncio= new Annuncio();
+
+		testAnnuncio.setDescrizione(descrizione);
+		testAnnuncio.setContratto("contratto");
+		testAnnuncio.setSettore(getFakeSettore());
+		testAnnuncio.setSede(getFakeSede());
+
+		annuncioRepository.save(testAnnuncio);
+		logger.info("AbstractRepositoryTest.getFakeAnnuncioWithDescrizione - Debug:" + testAnnuncio.toString());
+		logger.debug("AbstractRepositoryTest.getFakeAnnuncioWithDescrizione - Debug:" + testAnnuncio.getId() + "--");
+
+		logger.info("AbstractRepositoryTest.getFakeAnnuncioWithDescrizione - END");
+		return testAnnuncio;
+
+	}
+	
+	
 //--------------Candidatura---------------
 	
 	protected Candidatura getFakeCandidaturaWithAnnuncioAndUtente(Annuncio annuncio, Utente utente) {

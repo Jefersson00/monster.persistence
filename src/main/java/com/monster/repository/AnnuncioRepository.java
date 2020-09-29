@@ -12,6 +12,9 @@ import com.monster.persistence.entity.Annuncio;
 @Repository
 @Transactional
 public interface AnnuncioRepository extends JpaRepository<Annuncio, Long>{
+	
 	List<Annuncio> findByDataPubblicazioneGreaterThanEqual(Date dataPubblicazione);
 	List<Annuncio>findByContratto(String contratto);
+	List<Annuncio>findByDescrizioneContaining(String keyword);
+	
 }

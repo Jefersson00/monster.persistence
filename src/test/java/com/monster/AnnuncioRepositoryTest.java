@@ -1,5 +1,7 @@
 package com.monster;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -125,5 +127,29 @@ public class AnnuncioRepositoryTest extends AbstractRepositoryTest {
 		Assertions.assertTrue(annuncioRT.count() == 0);
 		logger.info("AnnuncioRepositoryTest.testDeleteAll() - END");
 	}
-
+	
+	
+	
+	@Test
+	public void findByDescrizioneContaining() {
+		logger.info("AnnuncioRepositoryTest.findByDescrizioneContaining() - START");
+		String descrizione ="dottore";
+		getFakeAnnuncioWithDescrizione(descrizione);
+		getFakeAnnuncioWithDescrizione(descrizione+" testo random");
+		getFakeAnnuncioWithDescrizione("maestra");
+		List<Annuncio> listAnnunci =annuncioRT.findByDescrizioneContaining(descrizione);
+		logger.info("AnnuncioRepositoryTest.findByDescrizioneContaining() - debug size:"+listAnnunci.size());
+		for(Annuncio annuncio : listAnnunci ) {
+			
+			
+			logger.info("AnnuncioRepositoryTest.findByDescrizioneContaining() - debug count:"+annuncioRT.count());
+			logger.info("AnnuncioRepositoryTest.findByDescrizioneContaining() - debug descrizione:"+annuncio.getDescrizione());
+		}
+		Assertions.assertTrue(listAnnunci.size()== 2);
+		
+		
+		logger.info("AnnuncioRepositoryTest.findByDescrizioneContaining() - END");
+	}
+	
+	
 }
