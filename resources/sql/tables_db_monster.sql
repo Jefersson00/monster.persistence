@@ -12,34 +12,13 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
+
+
+
 -- Dump della struttura del database monster
 DROP DATABASE IF EXISTS `monster`;
 CREATE DATABASE IF NOT EXISTS `monster` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `monster`;
-
--- Dump della struttura di tabella monster.annuncio
-DROP TABLE IF EXISTS `annuncio`;
-CREATE TABLE IF NOT EXISTS `annuncio` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `descrizione` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `contratto` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `data_pubblicazione` date DEFAULT NULL,
-  `id_settore` bigint NOT NULL,
-  `id_sede` bigint NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_sede` (`id_sede`),
-  KEY `id_settore` (`id_settore`),
-  CONSTRAINT `id_sede` FOREIGN KEY (`id_sede`) REFERENCES `sede` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `id_settore` FOREIGN KEY (`id_settore`) REFERENCES `settore` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- Dump dei dati della tabella monster.annuncio: ~0 rows (circa)
-/*!40000 ALTER TABLE `annuncio` DISABLE KEYS */;
-INSERT INTO `annuncio` (`id`, `descrizione`, `contratto`, `data_pubblicazione`, `id_settore`, `id_sede`) VALUES
-	(137, 'Infermiere Notturno', '6 mesi', '2020-09-28', 211, 201),
-	(138, 'Operaio', '12 mesi', '2020-09-26', 209, 203),
-	(139, 'Programmatore FrontEnd', 'Indeterminato', '2020-09-23', 210, 202);
-/*!40000 ALTER TABLE `annuncio` ENABLE KEYS */;
 
 -- Dump della struttura di tabella monster.azienda
 DROP TABLE IF EXISTS `azienda`;
@@ -66,6 +45,94 @@ INSERT INTO `azienda` (`id`, `nome`, `descrizione`, `link`, `email`, `password`,
 	(283, 'Moretti Costruzione', 'azienda specializzata in costruzioni pubbliche', 'moretti.costruzioni', 'moretti@gmail.com', 'def', NULL, 300, '2016-09-28', 'Edilizia'),
 	(284, 'San Raffaele', 'ospedale san raffaele di milano', 'ospedale.sanraffaele', 'o.raffaele@gmail.com', 'ghi', NULL, 500, '2013-09-28', 'Medico');
 /*!40000 ALTER TABLE `azienda` ENABLE KEYS */;
+
+
+-- Dump della struttura di tabella monster.sede
+DROP TABLE IF EXISTS `sede`;
+CREATE TABLE IF NOT EXISTS `sede` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `citta` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `regione` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `id_azienda` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_azienda` (`id_azienda`),
+  CONSTRAINT `id_azienda` FOREIGN KEY (`id_azienda`) REFERENCES `azienda` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dump dei dati della tabella monster.sede: ~0 rows (circa)
+/*!40000 ALTER TABLE `sede` DISABLE KEYS */;
+INSERT INTO `sede` (`id`, `citta`, `regione`, `id_azienda`) VALUES
+	(201, 'Milano', 'Lombardia', 284),
+	(202, 'Roma', 'Lazio', 282),
+	(203, 'Napoli', 'Campania', 283);
+/*!40000 ALTER TABLE `sede` ENABLE KEYS */;
+
+
+-- Dump della struttura di tabella monster.settore
+DROP TABLE IF EXISTS `settore`;
+CREATE TABLE IF NOT EXISTS `settore` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `descrizione` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nome` (`nome`)
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dump dei dati della tabella monster.settore: ~0 rows (circa)
+/*!40000 ALTER TABLE `settore` DISABLE KEYS */;
+INSERT INTO `settore` (`id`, `nome`, `descrizione`) VALUES
+	(209, 'Edile', 'Settore edile specializzato nella costruzione di edifici pubblici'),
+	(210, 'Informatico', 'Settore specializzato nello sviluppo software'),
+	(211, 'Medico', 'Settore dedicato ad ogni lavoratore sanitario');
+/*!40000 ALTER TABLE `settore` ENABLE KEYS */;
+
+
+-- Dump della struttura di tabella monster.annuncio
+DROP TABLE IF EXISTS `annuncio`;
+CREATE TABLE IF NOT EXISTS `annuncio` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `descrizione` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `contratto` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `data_pubblicazione` date DEFAULT NULL,
+  `id_settore` bigint NOT NULL,
+  `id_sede` bigint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_sede` (`id_sede`),
+  KEY `id_settore` (`id_settore`),
+  CONSTRAINT `id_sede` FOREIGN KEY (`id_sede`) REFERENCES `sede` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `id_settore` FOREIGN KEY (`id_settore`) REFERENCES `settore` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dump dei dati della tabella monster.annuncio: ~0 rows (circa)
+/*!40000 ALTER TABLE `annuncio` DISABLE KEYS */;
+INSERT INTO `annuncio` (`id`, `descrizione`, `contratto`, `data_pubblicazione`, `id_settore`, `id_sede`) VALUES
+	(137, 'Infermiere Notturno', '6 mesi', '2020-09-28', 211, 201),
+	(138, 'Operaio', '12 mesi', '2020-09-26', 209, 203),
+	(139, 'Programmatore FrontEnd', 'Indeterminato', '2020-09-23', 210, 202);
+/*!40000 ALTER TABLE `annuncio` ENABLE KEYS */;
+
+-- Dump della struttura di tabella monster.utente
+DROP TABLE IF EXISTS `utente`;
+CREATE TABLE IF NOT EXISTS `utente` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `cognome` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `telefono` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `data_nascita` date DEFAULT NULL,
+  `cv` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `telefono` (`telefono`)
+) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dump dei dati della tabella monster.utente: ~0 rows (circa)
+/*!40000 ALTER TABLE `utente` DISABLE KEYS */;
+INSERT INTO `utente` (`id`, `nome`, `cognome`, `email`, `password`, `telefono`, `data_nascita`, `cv`) VALUES
+	(235, 'cristhian', 'serafini', 'c.s@gmail.com', 'cris.sera', '1234567890', '2013-09-28', 'url'),
+	(236, 'jefferson', 'serrano', 'j.s@gmail.com', 'jef.ser', '123456789', '2017-09-28', 'url');
+/*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 
 -- Dump della struttura di tabella monster.candidatura
 DROP TABLE IF EXISTS `candidatura`;
@@ -128,66 +195,7 @@ CREATE TABLE IF NOT EXISTS `percorso_formativo` (
 /*!40000 ALTER TABLE `percorso_formativo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `percorso_formativo` ENABLE KEYS */;
 
--- Dump della struttura di tabella monster.sede
-DROP TABLE IF EXISTS `sede`;
-CREATE TABLE IF NOT EXISTS `sede` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `citta` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `regione` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `id_azienda` bigint NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_azienda` (`id_azienda`),
-  CONSTRAINT `id_azienda` FOREIGN KEY (`id_azienda`) REFERENCES `azienda` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dump dei dati della tabella monster.sede: ~0 rows (circa)
-/*!40000 ALTER TABLE `sede` DISABLE KEYS */;
-INSERT INTO `sede` (`id`, `citta`, `regione`, `id_azienda`) VALUES
-	(201, 'Milano', 'Lombardia', 284),
-	(202, 'Roma', 'Lazio', 282),
-	(203, 'Napoli', 'Campania', 283);
-/*!40000 ALTER TABLE `sede` ENABLE KEYS */;
-
--- Dump della struttura di tabella monster.settore
-DROP TABLE IF EXISTS `settore`;
-CREATE TABLE IF NOT EXISTS `settore` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `descrizione` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nome` (`nome`)
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- Dump dei dati della tabella monster.settore: ~0 rows (circa)
-/*!40000 ALTER TABLE `settore` DISABLE KEYS */;
-INSERT INTO `settore` (`id`, `nome`, `descrizione`) VALUES
-	(209, 'Edile', 'Settore edile specializzato nella costruzione di edifici pubblici'),
-	(210, 'Informatico', 'Settore specializzato nello sviluppo software'),
-	(211, 'Medico', 'Settore dedicato ad ogni lavoratore sanitario');
-/*!40000 ALTER TABLE `settore` ENABLE KEYS */;
-
--- Dump della struttura di tabella monster.utente
-DROP TABLE IF EXISTS `utente`;
-CREATE TABLE IF NOT EXISTS `utente` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `cognome` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `telefono` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data_nascita` date DEFAULT NULL,
-  `cv` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `telefono` (`telefono`)
-) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- Dump dei dati della tabella monster.utente: ~0 rows (circa)
-/*!40000 ALTER TABLE `utente` DISABLE KEYS */;
-INSERT INTO `utente` (`id`, `nome`, `cognome`, `email`, `password`, `telefono`, `data_nascita`, `cv`) VALUES
-	(235, 'cristhian', 'serafini', 'c.s@gmail.com', 'cris.sera', '1234567890', '2013-09-28', 'url'),
-	(236, 'jefferson', 'serrano', 'j.s@gmail.com', 'jef.ser', '123456789', '2017-09-28', 'url');
-/*!40000 ALTER TABLE `utente` ENABLE KEYS */;
 
 -- Dump della struttura di tabella monster.utente_competenza
 DROP TABLE IF EXISTS `utente_competenza`;
